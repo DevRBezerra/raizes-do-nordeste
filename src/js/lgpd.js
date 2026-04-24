@@ -16,7 +16,7 @@ let LGPD = (() => {
 
   function init() {
     if (!hasConsent()) {
-      let banner = document.getElementById('lgpd-banner');
+      let banner = document.getElementById('privacy-bar');
       if (banner) banner.classList.remove('hidden');
     }
   }
@@ -26,7 +26,7 @@ let LGPD = (() => {
 
 function acceptLGPD() {
   LGPD.savePrefs({ essential: true, personalization: true, fidelity: true, analytics: true });
-  let banner = document.getElementById('lgpd-banner');
+  let banner = document.getElementById('privacy-bar');
   if (banner) banner.classList.add('hidden');
   mostrarAviso('✅ Preferências salvas. Obrigado!', 'success');
 }
@@ -39,7 +39,7 @@ function savePrivacyPrefs() {
     analytics: document.getElementById('pref-analytics')?.checked ?? false,
   };
   LGPD.savePrefs(prefs);
-  let banner = document.getElementById('lgpd-banner');
+  let banner = document.getElementById('privacy-bar');
   if (banner) banner.classList.add('hidden');
   closePrivacyModal();
   mostrarAviso('✅ Preferências de privacidade salvas!', 'success');

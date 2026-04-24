@@ -14,7 +14,9 @@ function renderCart() {
   if (items.length === 0) {
     container.innerHTML = `
       <div class="cart-empty">
-        <div class="empty-icon">🛒</div>
+        <div class="empty-icon">
+          <img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" style="width:80px;height:80px;opacity:0.5">
+        </div>
         <h2>Seu carrinho está vazio</h2>
         <p>Adicione produtos do cardápio para continuar.</p>
         <a href="cardapio.html" class="btn-primary" style="margin-top:1.5rem">Ver Cardápio</a>
@@ -41,12 +43,17 @@ function renderCart() {
               <button class="qty-btn" onclick="updateItem(${item.id}, 1)" aria-label="Aumentar quantidade">+</button>
             </div>
             <span class="cart-item-price">${formatCurrency(item.price * item.qty)}</span>
-            <button class="btn-remove" onclick="removeItem(${item.id})" aria-label="Remover ${item.name} do carrinho">🗑️</button>
+            <button class="btn-remove" onclick="removeItem(${item.id})" aria-label="Remover ${item.name} do carrinho">
+              <img src="https://cdn-icons-png.flaticon.com/512/3096/3096673.png" style="width:18px;height:18px;">
+            </button>
           </div>
         </div>
       `).join('')}
     </div>
-    <button class="btn-danger btn-sm" style="margin-top:1rem" onclick="clearCart()">🗑️ Limpar carrinho</button>
+    <button class="btn-danger btn-sm" style="margin-top:1rem;display:flex;align-items:center;gap:6px" onclick="clearCart()">
+      <img src="https://cdn-icons-png.flaticon.com/512/3096/3096673.png" style="width:14px;height:14px;filter:invert(1)">
+      Limpar carrinho
+    </button>
   `;
 
   document.getElementById('btn-checkout').disabled = false;

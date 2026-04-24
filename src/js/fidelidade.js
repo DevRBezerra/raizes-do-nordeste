@@ -17,7 +17,10 @@ function renderPointsCard(user) {
     <div class="points-card" style="margin-bottom:2rem" role="region" aria-label="Seus pontos">
       <div class="points-value" aria-label="${user.points} pontos">${user.points}</div>
       <div class="points-label">pontos acumulados</div>
-      <div class="points-tier">${tier.emoji} Nível <strong>${tier.name}</strong></div>
+      <div class="points-tier" style="display:flex;align-items:center;justify-content:center;gap:8px">
+        <div style="width:24px;height:24px;border-radius:4px;overflow:hidden">${tier.emoji}</div>
+        Nível <strong>${tier.name}</strong>
+      </div>
       ${nextTier ? `
         <div style="margin-top:1.25rem">
           <div style="display:flex;justify-content:space-between;font-size:.85rem;opacity:.85;margin-bottom:.4rem">
@@ -39,7 +42,7 @@ function renderTiers(userPoints) {
     let isActive = userPoints >= tier.min && (tier.max === Infinity || userPoints <= tier.max);
     return `
       <div style="background:var(--color-surface);border-radius:12px;padding:1.25rem;box-shadow:var(--shadow-sm);border:2px solid ${isActive ? tier.color : 'var(--color-border)'}">
-        <div style="font-size:2rem;margin-bottom:.5rem">${tier.emoji}</div>
+        <div style="width:60px;height:60px;border-radius:12px;overflow:hidden;margin:0 auto 0.5rem;display:flex;align-items:center;justify-content:center">${tier.emoji}</div>
         <h3 style="color:${tier.color}">${tier.name}</h3>
         <p style="font-size:.85rem;color:var(--color-text-light)">
           ${tier.max == Infinity ? `${tier.min}+ pontos` : `${tier.min}–${tier.max} pontos`}
@@ -56,7 +59,7 @@ function renderRewards(userPoints) {
     const canRedeem = userPoints >= r.cost;
     return `
       <div class="reward-card" role="listitem" aria-label="${r.name}, ${r.cost} pontos">
-        <span class="reward-icon" aria-hidden="true">${r.emoji}</span>
+        <div class="reward-icon" aria-hidden="true" style="width:50px;height:50px;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center">${r.emoji}</div>
         <div class="reward-info">
           <h3>${r.name}</h3>
           <p>${r.desc}</p>

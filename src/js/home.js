@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // carrega tudo
   renderUnits();
   renderHighlights();
 });
@@ -11,12 +12,9 @@ function renderUnits() {
 
   grid.innerHTML = RN_DATA.units.map(unit => `
     <div class="unit-card ${selectedUnit?.id == unit.id ? 'selected' : ''}"
-         role="listitem"
-         tabindex="0"
          onclick="selectUnit(${unit.id})"
-         onkeydown="if(event.key==='Enter') selectUnit(${unit.id})"
-         aria-label="Selecionar unidade ${unit.name}">
-      <span class="unit-icon" aria-hidden="true">${unit.emoji}</span>
+         onkeydown="if(event.key==='Enter') selectUnit(${unit.id})">
+      <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--color-bg)">${unit.emoji}</div>
       <div class="unit-info">
         <h3>${unit.name}</h3>
         <p>${unit.city} · ${unit.hours}</p>
@@ -55,11 +53,10 @@ function renderHighlights() {
     .slice(0, 4);
 
   grid.innerHTML = featured.map(p => `
-    <div class="highlight-card card" role="listitem" tabindex="0"
+    <div class="highlight-card card" 
          onclick="window.location.href='src/pages/cardapio.html'"
-         onkeydown="if(event.key==='Enter') window.location.href='src/pages/cardapio.html'"
-         aria-label="${p.name}, ${formatCurrency(p.price)}">
-      <div class="highlight-img" aria-hidden="true">${p.emoji}</div>
+         onkeydown="if(event.key==='Enter') window.location.href='src/pages/cardapio.html'">
+      <div class="highlight-img">${p.emoji}</div>
       <div class="highlight-body">
         <h3>${p.name}</h3>
         <p class="highlight-price">${formatCurrency(p.price)}</p>

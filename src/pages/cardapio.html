@@ -11,7 +11,7 @@
 
   <div id="lgpd-banner" class="lgpd-banner hidden" role="dialog" aria-labelledby="lgpd-title" aria-modal="true">
     <div class="lgpd-content">
-      <h2 id="lgpd-title">🍃 Sua privacidade importa</h2>
+      <h2 id="lgpd-title"> Sua privacidade importa</h2>
       <p>Utilizamos cookies para melhorar sua experiência conforme a <strong>LGPD (Lei nº 13.709/2018)</strong>.</p>
       <div class="lgpd-actions">
         <button class="btn-secondary" onclick="openPrivacyModal()">Gerenciar preferências</button>
@@ -51,8 +51,9 @@
       </nav>
       <div class="header-actions">
         <a href="login.html" class="btn-outline" id="btn-login">Entrar</a>
-        <a href="carrinho.html" class="btn-cart" aria-label="Ver carrinho">
-          🛒 <span id="cart-count" class="cart-badge">0</span>
+        <a href="carrinho.html" class="btn-cart" aria-label="Ver carrinho" style="display:flex; align-items:center;">
+          <img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" alt="Carrinho" style="width: 24px; height: 24px;">
+          <span id="cart-count" class="cart-badge">0</span>
         </a>
       </div>
       <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
@@ -79,7 +80,7 @@
 
       <aside class="cardapio-sidebar" aria-label="Filtros do cardápio">
         <div class="unit-selector">
-          <label for="unit-select">📍 Unidade</label>
+          <label for="unit-select"><img src='https://cdn-icons-png.flaticon.com/512/149/149060.png' style='width:18px;height:18px;vertical-align:middle'> Unidade</label>
           <select class="form-select" id="unit-select" onchange="changeUnit(this.value)" aria-label="Selecionar unidade">
             <option value="">Selecione uma unidade</option>
           </select>
@@ -95,13 +96,13 @@
         <div id="promo-banner" style="margin-bottom:1.5rem"></div>
 
         <div class="cardapio-search" role="search">
-          <span class="search-icon" aria-hidden="true">🔍</span>
+          <span class="search-icon" aria-hidden="true"><img src='https://cdn-icons-png.flaticon.com/512/622/622669.png' style='width:18px;height:18px;vertical-align:middle'></span>
           <input type="search" id="search-input" placeholder="Buscar produto..." aria-label="Buscar produto no cardápio" oninput="filterProducts(this.value)" />
         </div>
 
         <div id="products-container" aria-live="polite" aria-label="Lista de produtos">
           <div class="text-center" style="padding:3rem;color:var(--color-text-light)">
-            <p style="font-size:2rem">📍</p>
+            <p style="font-size:2rem"><img src='https://cdn-icons-png.flaticon.com/512/149/149060.png' style='width:18px;height:18px;vertical-align:middle'></p>
             <p>Selecione uma unidade para ver o cardápio</p>
           </div>
         </div>

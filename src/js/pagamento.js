@@ -16,7 +16,10 @@ function renderOrderSummary() {
     <div style="border:1px solid var(--color-border);border-radius:8px;overflow:hidden">
       ${items.map(item => `
         <div style="display:flex;justify-content:space-between;padding:.75rem 1rem;border-bottom:1px solid var(--color-border);font-size:.9rem">
-          <span>${item.emoji} ${item.name} × ${item.qty}</span>
+          <span style="display:flex;align-items:center;gap:8px">
+            <div style="width:20px;height:20px;border-radius:4px;overflow:hidden;flex-shrink:0">${item.emoji}</div> 
+            ${item.name} × ${item.qty}
+          </span>
           <span style="font-weight:600">${formatCurrency(item.price * item.qty)}</span>
         </div>
       `).join('')}

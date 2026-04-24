@@ -212,7 +212,7 @@ button:focus-visible, a:focus-visible {
   color: #777;
 }
 
-.lgpd-banner {
+.privacy-bar {
   position: fixed;
   bottom: 0; left: 0; right: 0;
   background: #1a1a1a;
@@ -222,11 +222,11 @@ button:focus-visible, a:focus-visible {
   box-shadow: 0 -4px 20px rgba(0,0,0,.3);
   animation: slideUp .4s ease;
 }
-.lgpd-content { max-width: 900px; margin: 0 auto; }
-.lgpd-content h2 { color: #fff; font-size: 1.1rem; margin-bottom: .5rem; }
-.lgpd-content p  { font-size: .9rem; color: #ccc; margin-bottom: .5rem; }
-.lgpd-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
-.lgpd-banner.hidden { display: none; }
+.privacy-content { max-width: 900px; margin: 0 auto; }
+.privacy-content h2 { color: #fff; font-size: 1.1rem; margin-bottom: .5rem; }
+.privacy-content p  { font-size: .9rem; color: #ccc; margin-bottom: .5rem; }
+.privacy-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
+.privacy-bar.hidden { display: none; }
 
 @keyframes slideUp {
   from { transform: translateY(100%); }

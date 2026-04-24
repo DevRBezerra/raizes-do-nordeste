@@ -37,7 +37,10 @@
       </nav>
       <div class="header-actions">
         <a href="login.html" class="btn-outline active" id="btn-login">Entrar</a>
-        <a href="carrinho.html" class="btn-cart" aria-label="Ver carrinho">🛒 <span id="cart-count" class="cart-badge">0</span></a>
+        <a href="carrinho.html" class="btn-cart" aria-label="Ver carrinho" style="display:flex; align-items:center;">
+          <img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" alt="Carrinho" style="width: 24px; height: 24px;">
+          <span id="cart-count" class="cart-badge">0</span>
+        </a>
       </div>
       <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
     </div>
@@ -60,7 +63,7 @@
         </div>
 
         <div id="form-login" role="tabpanel" aria-labelledby="tab-login">
-          <h1>Bem-vindo de volta! 👋</h1>
+          <h1>Bem-vindo de volta!</h1>
           <p class="subtitle">Entre para acessar seus pedidos e pontos.</p>
 
           <div id="login-error" class="alert alert-error hidden" role="alert"></div>
@@ -96,12 +99,12 @@
           <p class="auth-footer">Não tem conta? <a href="#" onclick="showTab('register')">Cadastre-se grátis</a></p>
 
           <div class="alert alert-info" style="margin-top:1rem;font-size:.85rem">
-            💡 <strong>Demo:</strong> use <code>maria@email.com</code> / <code>123456</code>
+            <strong>Demo:</strong> use <code>maria@email.com</code> / <code>123456</code>
           </div>
         </div>
 
         <div id="form-register" class="hidden" role="tabpanel" aria-labelledby="tab-register">
-          <h1>Criar conta 🌵</h1>
+          <h1>Criar conta</h1>
           <p class="subtitle">Cadastre-se e comece a acumular pontos!</p>
 
           <div id="register-error" class="alert alert-error hidden" role="alert"></div>
@@ -146,7 +149,7 @@
             </div>
 
             <div style="background:#fde8e6;border-radius:8px;padding:1rem;margin-bottom:1rem">
-              <p style="font-size:.85rem;font-weight:600;margin-bottom:.75rem">🔒 Consentimento de dados (LGPD)</p>
+              <p style="font-size:.85rem;font-weight:600;margin-bottom:.75rem">Consentimento de dados (LGPD)</p>
               <label style="display:flex;gap:.5rem;align-items:flex-start;margin-bottom:.5rem;cursor:pointer">
                 <input type="checkbox" id="consent-terms" required aria-required="true" style="margin-top:2px;accent-color:var(--color-primary)" />
                 <span style="font-size:.85rem">Li e aceito os <a href="#" class="link">Termos de Uso</a> e a <a href="#" class="link">Política de Privacidade</a>. <strong>*</strong></span>
