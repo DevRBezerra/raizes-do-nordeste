@@ -1,3 +1,7 @@
+/* =============================================
+   PEDIDO — Status em tempo real (mock)
+   ============================================= */
+
 let statusInterval = null;
 let currentStatusIdx = 0;
 
@@ -7,13 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function getOrder() {
   try {
-    let saved = JSON.parse(localStorage.getItem('rn_current_order'));
+    const saved = JSON.parse(localStorage.getItem('rn_current_order'));
     return saved || RN_DATA.mockOrder;
   } catch { return RN_DATA.mockOrder; }
 }
 
 function renderStatus() {
-  let container = document.getElementById('status-container');
+  const container = document.getElementById('status-container');
   const order = getOrder();
   const statusKeys = RN_DATA.orderStatuses.map(s => s.key);
   currentStatusIdx = statusKeys.indexOf(order.status);
@@ -32,7 +36,7 @@ function renderStatus() {
       <div class="status-timeline" role="list" aria-label="Etapas do pedido">
         ${RN_DATA.orderStatuses.map((s, i) => `
           <div class="timeline-step ${i < currentStatusIdx ? 'done' : i === currentStatusIdx ? 'active' : ''}"
-               role="listitem" aria-label="${s.label}${i < currentStatusIdx ? ' - concluído' : i == currentStatusIdx ? ' - em andamento' : ' - pendente'}">
+               role="listitem" aria-label="${s.label}${i < currentStatusIdx ? ' - concluído' : i === currentStatusIdx ? ' - em andamento' : ' - pendente'}">
             <div class="timeline-dot" aria-hidden="true">${i < currentStatusIdx ? '✓' : ''}</div>
             <h3>${s.icon} ${s.label}</h3>
             <p>${s.desc}</p>
@@ -75,14 +79,14 @@ function renderStatus() {
 }
 
 function advanceStatus() {
-  let statusKeys = RN_DATA.orderStatuses.map(s => s.key);
+  const statusKeys = RN_DATA.orderStatuses.map(s => s.key);
   if (currentStatusIdx >= statusKeys.length - 1) return;
 
   currentStatusIdx++;
-  let order = getOrder();
+  const order = getOrder();
   order.status = statusKeys[currentStatusIdx];
   localStorage.setItem('rn_current_order', JSON.stringify(order));
 
   renderStatus();
-  mostrarAviso(`${RN_DATA.orderStatuses[currentStatusIdx].icon} ${RN_DATA.orderStatuses[currentStatusIdx].label}`, 'success');
+  showToast(`${RN_DATA.orderStatuses[currentStatusIdx].icon} ${RN_DATA.orderStatuses[currentStatusIdx].label}`, 'success');
 }

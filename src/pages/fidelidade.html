@@ -20,10 +20,7 @@
       </nav>
       <div class="header-actions">
         <a href="login.html" class="btn-outline" id="btn-login">Entrar</a>
-        <a href="carrinho.html" class="btn-cart" aria-label="Ver carrinho" style="display:flex; align-items:center;">
-          <img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" alt="Carrinho" style="width: 24px; height: 24px;">
-          <span id="cart-count" class="cart-badge">0</span>
-        </a>
+        <a href="carrinho.html" class="btn-cart" aria-label="Ver carrinho">🛒 <span id="cart-count" class="cart-badge">0</span></a>
       </div>
       <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
     </div>
@@ -39,7 +36,7 @@
   <div class="page-header">
     <div class="container">
       <p class="breadcrumb"><a href="../../index.html">Início</a> › Fidelidade</p>
-      <h1>Programa Raízes Fiel</h1>
+      <h1>⭐ Programa Raízes Fiel</h1>
       <p>Acumule pontos e troque por recompensas incríveis</p>
     </div>
   </div>
@@ -47,36 +44,41 @@
   <main id="main-content">
     <div class="container fidelity-layout">
 
+      <!-- Pontos do usuário -->
       <div id="points-card-container"></div>
 
+      <!-- Tiers -->
       <section aria-labelledby="tiers-title" style="margin-bottom:2rem">
         <h2 id="tiers-title" style="margin-bottom:1rem">Níveis do Programa</h2>
         <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem" id="tiers-grid"></div>
       </section>
 
+      <!-- Recompensas -->
       <section aria-labelledby="rewards-title" style="margin-bottom:2rem">
         <h2 id="rewards-title" style="margin-bottom:1rem">Recompensas disponíveis</h2>
         <div class="rewards-grid" id="rewards-grid" role="list"></div>
       </section>
 
+      <!-- Como funciona -->
       <section aria-labelledby="how-title" style="margin-bottom:2rem">
         <h2 id="how-title" style="margin-bottom:1rem">Como funciona</h2>
         <div style="display:grid;grid-template-columns:1fr;gap:1rem" id="how-grid">
           <div style="background:var(--color-surface);border-radius:12px;padding:1.25rem;box-shadow:var(--shadow-sm);display:flex;gap:1rem;align-items:flex-start">
-            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&q=80" alt="Pedidos" style="width:40px;height:40px;border-radius:8px;object-fit:cover;">
+            <span style="font-size:2rem">🛒</span>
             <div><h3>1. Faça pedidos</h3><p style="font-size:.9rem;color:var(--color-text-light)">A cada R$ 1,00 gasto, você acumula 1 ponto.</p></div>
           </div>
           <div style="background:var(--color-surface);border-radius:12px;padding:1.25rem;box-shadow:var(--shadow-sm);display:flex;gap:1rem;align-items:flex-start">
-            <img src="https://images.unsplash.com/photo-1522204523234-8729aa6e3d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&q=80" alt="Estrela" style="width:40px;height:40px;border-radius:8px;object-fit:cover;">
+            <span style="font-size:2rem">⭐</span>
             <div><h3>2. Acumule pontos</h3><p style="font-size:.9rem;color:var(--color-text-light)">Pontos nunca expiram. Às quartas, pontos em dobro!</p></div>
           </div>
           <div style="background:var(--color-surface);border-radius:12px;padding:1.25rem;box-shadow:var(--shadow-sm);display:flex;gap:1rem;align-items:flex-start">
-            <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&q=80" alt="Presente" style="width:40px;height:40px;border-radius:8px;object-fit:cover;">
+            <span style="font-size:2rem">🎁</span>
             <div><h3>3. Resgate recompensas</h3><p style="font-size:.9rem;color:var(--color-text-light)">Troque seus pontos por produtos, descontos e benefícios.</p></div>
           </div>
         </div>
       </section>
 
+      <!-- Histórico -->
       <section aria-labelledby="history-title" style="margin-bottom:2rem" id="history-section">
         <h2 id="history-title" style="margin-bottom:1rem">Histórico de pontos</h2>
         <div style="overflow-x:auto">
@@ -93,8 +95,9 @@
         </div>
       </section>
 
+      <!-- LGPD nota -->
       <div class="alert alert-info" style="font-size:.85rem">
-        <strong>Privacidade:</strong> Os dados do programa de fidelidade são tratados conforme a LGPD (Lei nº 13.709/2018).
+        🔒 <strong>Privacidade:</strong> Os dados do programa de fidelidade são tratados conforme a LGPD (Lei nº 13.709/2018).
         Você pode solicitar a exclusão dos seus dados a qualquer momento em <a href="perfil.html" class="link">Minha Conta → Privacidade</a>.
       </div>
 

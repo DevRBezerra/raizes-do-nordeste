@@ -1,3 +1,7 @@
+/* =============================================
+   FIDELIDADE PAGE
+   ============================================= */
+
 document.addEventListener('DOMContentLoaded', () => {
   const user = getLoggedUser() || RN_DATA.mockUser;
   renderPointsCard(user);
@@ -8,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderPointsCard(user) {
   const tier = getUserTier(user.points);
-  let nextTier = RN_DATA.tiers.find(t => t.min > user.points);
-  let progress = nextTier
+  const nextTier = RN_DATA.tiers.find(t => t.min > user.points);
+  const progress = nextTier
     ? Math.round(((user.points - tier.min) / (nextTier.min - tier.min)) * 100)
     : 100;
 
@@ -17,10 +21,7 @@ function renderPointsCard(user) {
     <div class="points-card" style="margin-bottom:2rem" role="region" aria-label="Seus pontos">
       <div class="points-value" aria-label="${user.points} pontos">${user.points}</div>
       <div class="points-label">pontos acumulados</div>
-      <div class="points-tier" style="display:flex;align-items:center;justify-content:center;gap:8px">
-        <div style="width:24px;height:24px;border-radius:4px;overflow:hidden">${tier.emoji}</div>
-        Nível <strong>${tier.name}</strong>
-      </div>
+      <div class="points-tier">${tier.emoji} Nível <strong>${tier.name}</strong></div>
       ${nextTier ? `
         <div style="margin-top:1.25rem">
           <div style="display:flex;justify-content:space-between;font-size:.85rem;opacity:.85;margin-bottom:.4rem">
@@ -39,13 +40,13 @@ function renderPointsCard(user) {
 function renderTiers(userPoints) {
   const grid = document.getElementById('tiers-grid');
   grid.innerHTML = RN_DATA.tiers.map(tier => {
-    let isActive = userPoints >= tier.min && (tier.max === Infinity || userPoints <= tier.max);
+    const isActive = userPoints >= tier.min && (tier.max === Infinity || userPoints <= tier.max);
     return `
       <div style="background:var(--color-surface);border-radius:12px;padding:1.25rem;box-shadow:var(--shadow-sm);border:2px solid ${isActive ? tier.color : 'var(--color-border)'}">
-        <div style="width:60px;height:60px;border-radius:12px;overflow:hidden;margin:0 auto 0.5rem;display:flex;align-items:center;justify-content:center">${tier.emoji}</div>
+        <div style="font-size:2rem;margin-bottom:.5rem">${tier.emoji}</div>
         <h3 style="color:${tier.color}">${tier.name}</h3>
         <p style="font-size:.85rem;color:var(--color-text-light)">
-          ${tier.max == Infinity ? `${tier.min}+ pontos` : `${tier.min}–${tier.max} pontos`}
+          ${tier.max === Infinity ? `${tier.min}+ pontos` : `${tier.min}–${tier.max} pontos`}
         </p>
         ${isActive ? '<span class="badge badge-success" style="margin-top:.5rem">Seu nível atual</span>' : ''}
       </div>
@@ -54,12 +55,12 @@ function renderTiers(userPoints) {
 }
 
 function renderRewards(userPoints) {
-  let grid = document.getElementById('rewards-grid');
+  const grid = document.getElementById('rewards-grid');
   grid.innerHTML = RN_DATA.rewards.map(r => {
     const canRedeem = userPoints >= r.cost;
     return `
       <div class="reward-card" role="listitem" aria-label="${r.name}, ${r.cost} pontos">
-        <div class="reward-icon" aria-hidden="true" style="width:50px;height:50px;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center">${r.emoji}</div>
+        <span class="reward-icon" aria-hidden="true">${r.emoji}</span>
         <div class="reward-info">
           <h3>${r.name}</h3>
           <p>${r.desc}</p>
@@ -79,12 +80,12 @@ function renderRewards(userPoints) {
 }
 
 function redeemReward(rewardId, cost) {
-  let reward = RN_DATA.rewards.find(r => r.id == rewardId);
+  const reward = RN_DATA.rewards.find(r => r.id === rewardId);
   if (!reward) return;
 
   const user = getLoggedUser() || RN_DATA.mockUser;
   if (user.points < cost) {
-    mostrarAviso('⚠️ Pontos insuficientes para este resgate.', 'error');
+    showToast('⚠️ Pontos insuficientes para este resgate.', 'error');
     return;
   }
 
@@ -92,14 +93,14 @@ function redeemReward(rewardId, cost) {
 
   user.points -= cost;
   localStorage.setItem('rn_user', JSON.stringify(user));
-  mostrarAviso(`🎁 "${reward.name}" resgatado com sucesso!`, 'success');
+  showToast(`🎁 "${reward.name}" resgatado com sucesso!`, 'success');
   renderPointsCard(user);
   renderTiers(user.points);
   renderRewards(user.points);
 }
 
 function renderHistory() {
-  let tbody = document.getElementById('history-body');
+  const tbody = document.getElementById('history-body');
   tbody.innerHTML = RN_DATA.pointsHistory.map(h => `
     <tr>
       <td>${h.date}</td>

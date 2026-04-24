@@ -1,11 +1,15 @@
+/* =============================================
+   PAGAMENTO PAGE — Fluxo de pagamento externo (mock)
+   ============================================= */
+
 document.addEventListener('DOMContentLoaded', () => {
   renderOrderSummary();
 });
 
 function renderOrderSummary() {
-  let items = Cart.getAll();
+  const items = Cart.getAll();
   const subtotal = Cart.subtotal();
-  let container = document.getElementById('order-summary-items');
+  const container = document.getElementById('order-summary-items');
 
   if (items.length === 0) {
     window.location.href = 'carrinho.html';
@@ -16,10 +20,7 @@ function renderOrderSummary() {
     <div style="border:1px solid var(--color-border);border-radius:8px;overflow:hidden">
       ${items.map(item => `
         <div style="display:flex;justify-content:space-between;padding:.75rem 1rem;border-bottom:1px solid var(--color-border);font-size:.9rem">
-          <span style="display:flex;align-items:center;gap:8px">
-            <div style="width:20px;height:20px;border-radius:4px;overflow:hidden;flex-shrink:0">${item.emoji}</div> 
-            ${item.name} × ${item.qty}
-          </span>
+          <span>${item.emoji} ${item.name} × ${item.qty}</span>
           <span style="font-weight:600">${formatCurrency(item.price * item.qty)}</span>
         </div>
       `).join('')}
@@ -33,10 +34,11 @@ function renderOrderSummary() {
 function processPayment() {
   showStep('processing');
 
-  let delay = 2000 + Math.random() * 1000;
+  // Simula chamada ao gateway externo (2-3 segundos)
+  const delay = 2000 + Math.random() * 1000;
   setTimeout(() => {
-    
-    let success = Math.random() > 0.1;
+    // 90% de chance de sucesso (simula falha ocasional)
+    const success = Math.random() > 0.1;
     if (success) {
       paymentSuccess();
     } else {
@@ -47,13 +49,14 @@ function processPayment() {
 
 function paymentSuccess() {
   const subtotal = Cart.subtotal();
-  let orderNum = '#' + (1040 + Math.floor(Math.random() * 100));
-  let points = Math.floor(subtotal);
+  const orderNum = '#' + (1040 + Math.floor(Math.random() * 100));
+  const points = Math.floor(subtotal);
 
   document.getElementById('order-number').textContent = orderNum;
   document.getElementById('paid-total').textContent = formatCurrency(subtotal);
   document.getElementById('points-earned').textContent = `+${points} pontos`;
 
+  // Salva pedido no localStorage para a página de status
   const order = {
     id: orderNum,
     items: Cart.getAll(),
@@ -67,7 +70,8 @@ function paymentSuccess() {
   };
   localStorage.setItem('rn_current_order', JSON.stringify(order));
 
-  let user = getLoggedUser();
+  // Atualiza pontos do usuário
+  const user = getLoggedUser();
   if (user) {
     user.points = (user.points || 0) + points;
     localStorage.setItem('rn_user', JSON.stringify(user));
@@ -88,6 +92,6 @@ function retryPayment() {
 
 function showStep(step) {
   ['confirm', 'processing', 'success', 'error'].forEach(s => {
-    document.getElementById(`step-${s}`).classList.toggle('hidden', s != step);
+    document.getElementById(`step-${s}`).classList.toggle('hidden', s !== step);
   });
 }
