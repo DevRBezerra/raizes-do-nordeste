@@ -1,9 +1,5 @@
-/* =============================================
-   PERFIL PAGE
-   ============================================= */
-
 document.addEventListener('DOMContentLoaded', () => {
-  const user = getLoggedUser() || RN_DATA.mockUser;
+  let user = getLoggedUser() || RN_DATA.mockUser;
   loadProfile(user);
   renderOrders();
 });
@@ -27,17 +23,17 @@ function showSection(section) {
 
 function saveProfile(e) {
   e.preventDefault();
-  const user = getLoggedUser() || RN_DATA.mockUser;
+  let user = getLoggedUser() || RN_DATA.mockUser;
   user.name  = document.getElementById('p-name').value.trim();
   user.email = document.getElementById('p-email').value.trim();
   user.phone = document.getElementById('p-phone').value.trim();
   localStorage.setItem('rn_user', JSON.stringify(user));
   loadProfile(user);
-  showToast('✅ Dados atualizados com sucesso!', 'success');
+  mostrarAviso('✅ Dados atualizados com sucesso!', 'success');
 }
 
 function renderOrders() {
-  const container = document.getElementById('orders-list');
+  let container = document.getElementById('orders-list');
   const order = JSON.parse(localStorage.getItem('rn_current_order') || 'null');
   if (!order) {
     container.innerHTML = `<div class="text-center" style="padding:2rem;color:var(--color-text-light)"><p style="font-size:2rem">📦</p><p>Nenhum pedido encontrado.</p><a href="cardapio.html" class="btn-primary" style="margin-top:1rem">Fazer primeiro pedido</a></div>`;
@@ -59,11 +55,11 @@ function renderOrders() {
 function logout() {
   if (!confirm('Deseja sair da sua conta?')) return;
   localStorage.removeItem('rn_user');
-  showToast('👋 Até logo!', 'info');
+  mostrarAviso('👋 Até logo!', 'info');
   setTimeout(() => { window.location.href = '../../index.html'; }, 800);
 }
 
 function requestDelete() {
   if (!confirm('⚠️ Tem certeza? Esta ação é irreversível e excluirá todos os seus dados permanentemente.')) return;
-  showToast('📧 Solicitação de exclusão enviada. Você receberá um e-mail de confirmação em até 15 dias.', 'info', 6000);
+  mostrarAviso('📧 Solicitação de exclusão enviada. Você receberá um e-mail de confirmação em até 15 dias.', 'info', 6000);
 }

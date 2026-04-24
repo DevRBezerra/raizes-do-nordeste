@@ -3,30 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Raízes do Nordeste</title>
+  <title>Raízes do Nordeste - Delivery & Fidelidade</title>
+  <meta name="description" content="O melhor da culinária nordestina: tapiocas, cuscuz e bolos regionais. Peça agora!">
+  <meta name="author" content="Renan Bezerra">
   <link rel="stylesheet" href="src/css/global.css" />
   <link rel="stylesheet" href="src/css/home.css" />
 </head>
 <body>
 
-  <!-- LGPD Banner -->
-  <div id="lgpd-banner" class="lgpd-banner" role="dialog" aria-labelledby="lgpd-title" aria-modal="true">
-    <div class="lgpd-content">
-      <h2 id="lgpd-title">🍃 Sua privacidade importa</h2>
+  <div id="privacy-bar" class="privacy-bar hidden" role="dialog" aria-labelledby="privacy-title" aria-modal="true">
+    <div class="privacy-content">
+      <h2 id="privacy-title"> Sua privacidade importa</h2>
       <p>
         Utilizamos cookies e dados pessoais para melhorar sua experiência, personalizar ofertas e
         garantir o funcionamento do programa de fidelidade. Seus dados são tratados conforme a
         <strong>Lei Geral de Proteção de Dados (LGPD – Lei nº 13.709/2018)</strong>.
       </p>
       <p>Você pode aceitar todos os cookies ou gerenciar suas preferências.</p>
-      <div class="lgpd-actions">
+      <div class="privacy-actions">
         <button class="btn-secondary" onclick="openPrivacyModal()">Gerenciar preferências</button>
         <button class="btn-primary" onclick="acceptLGPD()">Aceitar todos</button>
       </div>
     </div>
   </div>
 
-  <!-- Privacy Modal -->
   <div id="privacy-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-overlay" onclick="closePrivacyModal()"></div>
     <div class="modal-box">
@@ -61,10 +61,9 @@
     </div>
   </div>
 
-  <!-- Header -->
   <header class="header" role="banner">
     <div class="container header-inner">
-      <a href="index.html" class="logo" aria-label="Raízes do Nordeste - Página inicial">
+      <a href="index.html" class="logo">
         <span class="logo-icon">🌵</span>
         <span class="logo-text">Raízes do Nordeste</span>
       </a>
@@ -76,13 +75,14 @@
       </nav>
       <div class="header-actions">
         <a href="src/pages/login.html" class="btn-outline" id="btn-login">Entrar</a>
-        <a href="src/pages/carrinho.html" class="btn-cart" aria-label="Ver carrinho">
-          🛒 <span id="cart-count" class="cart-badge">0</span>
+        <a href="src/pages/carrinho.html" class="btn-cart" aria-label="Ver carrinho" style="display:flex; align-items:center;">
+          <img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" alt="Carrinho" style="width: 24px; height: 24px;">
+          <span id="cart-count" class="cart-badge">0</span>
         </a>
       </div>
       <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
     </div>
-    <!-- Mobile nav -->
+    
     <nav class="mobile-nav hidden" id="mobile-nav" aria-label="Menu mobile">
       <a href="index.html" class="mobile-nav-link">Início</a>
       <a href="src/pages/cardapio.html" class="mobile-nav-link">Cardápio</a>
@@ -94,7 +94,6 @@
 
   <main id="main-content">
 
-    <!-- Hero -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-inner">
         <div class="hero-text">
@@ -105,65 +104,59 @@
             <a href="src/pages/login.html" class="btn-outline btn-lg">Criar conta</a>
           </div>
         </div>
-        <div class="hero-image" aria-hidden="true">
-          <div class="hero-img-placeholder">
-            <span>🥘</span>
-          </div>
+        <div class="hero-image" aria-hidden="true" style="border-radius:20px; overflow:hidden;">
+          <img src="src/imgs/comida.jpeg" alt="Comida Nordestina" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
         </div>
       </div>
     </section>
 
-    <!-- Selecionar Unidade -->
-    <section class="section-unit" aria-labelledby="unit-title">
+    <section class="section-unit">
       <div class="container">
-        <h2 id="unit-title">Escolha sua unidade</h2>
-        <p class="section-subtitle">Cardápio e disponibilidade variam por unidade</p>
-        <div class="unit-grid" id="unit-grid" role="list">
-          <!-- Preenchido via JS -->
+        <h2>Escolha sua unidade</h2>
+        <p class="section-subtitle">O cardápio pode variar dependendo da unidade</p>
+        <div class="unit-grid" id="unit-grid">
+          
         </div>
       </div>
     </section>
 
-    <!-- Destaques -->
-    <section class="section-highlights" aria-labelledby="highlights-title">
+    <section class="section-highlights">
       <div class="container">
-        <h2 id="highlights-title">Destaques do dia</h2>
-        <div class="highlights-grid" id="highlights-grid" role="list">
-          <!-- Preenchido via JS -->
+        <h2>Destaques de hoje</h2>
+        <div class="highlights-grid" id="highlights-grid">
+          
         </div>
       </div>
     </section>
 
-    <!-- Canais de atendimento -->
-    <section class="section-channels" aria-labelledby="channels-title">
+    <section class="section-channels">
       <div class="container">
-        <h2 id="channels-title">Como você quer pedir?</h2>
+        <h2>Como você quer pedir?</h2>
         <div class="channels-grid">
           <div class="channel-card">
-            <span class="channel-icon" aria-hidden="true">📱</span>
-            <h3>Aplicativo</h3>
-            <p>Pedidos antecipados, promoções exclusivas e programa de fidelidade.</p>
+            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="App" style="width: 48px; height: 48px; object-fit: cover; border-radius: 12px; margin-bottom: 1rem; display: block;" />
+            <h3>Pelo Aplicativo</h3>
+            <p>Peça de onde estiver e acumule pontos no Raízes Fiel.</p>
           </div>
           <div class="channel-card">
-            <span class="channel-icon" aria-hidden="true">🖥️</span>
-            <h3>Totem</h3>
-            <p>Auto-atendimento rápido direto na loja, sem filas.</p>
+            <img src="src/imgs/totem.png" alt="Totem" style="width: 48px; height: 48px; object-fit: cover; border-radius: 12px; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto;" />
+            <h3>No Totem</h3>
+            <p>Auto-atendimento rápido na loja, sem pegar fila no balcão.</p>
           </div>
           <div class="channel-card">
-            <span class="channel-icon" aria-hidden="true">🧑‍💼</span>
-            <h3>Balcão</h3>
-            <p>Atendimento humano para quem prefere o contato pessoal.</p>
+            <img src="src/imgs/balcao.jpg" alt="Balcão" style="width: 48px; height: 48px; object-fit: cover; border-radius: 12px; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto;" />
+            <h3>No Balcão</h3>
+            <p>Aquele atendimento de sempre pra quem não abre mão da prosa.</p>
           </div>
           <div class="channel-card">
-            <span class="channel-icon" aria-hidden="true">🏃</span>
+            <img src="https://images.unsplash.com/photo-1526367790999-0150786686a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Pick-up" style="width: 48px; height: 48px; object-fit: cover; border-radius: 12px; margin-bottom: 1rem; display: block;" />
             <h3>Pick-up</h3>
-            <p>Peça online e retire rapidinho, sem esperar na fila.</p>
+            <p>Peça online e só passe na loja pra retirar rapidinho.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Fidelidade CTA -->
     <section class="section-fidelity" aria-labelledby="fidelity-title">
       <div class="container fidelity-inner">
         <div>
@@ -171,13 +164,15 @@
           <p>Acumule pontos a cada pedido e troque por descontos, produtos grátis e benefícios exclusivos.</p>
           <a href="src/pages/login.html" class="btn-primary">Participar agora</a>
         </div>
-        <div class="fidelity-badge" aria-hidden="true">⭐ 1 real = 1 ponto</div>
+        <div class="fidelity-badge" aria-hidden="true" style="display:flex; align-items:center; gap:8px;">
+          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Estrela" style="width:18px; height:18px;">
+          1 real = 1 ponto
+        </div>
       </div>
     </section>
 
   </main>
 
-  <!-- Footer -->
   <footer class="footer" role="contentinfo">
     <div class="container footer-inner">
       <div class="footer-brand">

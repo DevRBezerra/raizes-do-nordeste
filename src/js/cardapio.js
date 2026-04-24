@@ -1,7 +1,3 @@
-/* =============================================
-   CARDÁPIO PAGE
-   ============================================= */
-
 let currentUnit = null;
 let currentCategory = 'all';
 let searchTerm = '';
@@ -11,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCategories();
   renderPromos();
 
-  const saved = Cart.getUnit();
+  let saved = Cart.getUnit();
   if (saved) {
     currentUnit = saved;
     document.getElementById('unit-select').value = saved.id;
@@ -21,11 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function populateUnitSelect() {
-  const sel = document.getElementById('unit-select');
+  let sel = document.getElementById('unit-select');
   RN_DATA.units.forEach(u => {
-    const opt = document.createElement('option');
+    let opt = document.createElement('option');
     opt.value = u.id;
-    opt.textContent = `${u.emoji} ${u.name} — ${u.open ? 'Aberta' : 'Fechada'}`;
+    opt.textContent = `${u.name} — ${u.open ? 'Aberta' : 'Fechada'}`;
     if (!u.open) opt.disabled = true;
     sel.appendChild(opt);
   });
@@ -33,13 +29,13 @@ function populateUnitSelect() {
 
 function changeUnit(unitId) {
   if (!unitId) { currentUnit = null; renderProducts(); return; }
-  const unit = RN_DATA.units.find(u => u.id === parseInt(unitId));
-  if (!unit || !unit.open) { showToast('⚠️ Esta unidade está fechada.', 'error'); return; }
+  let unit = RN_DATA.units.find(u => u.id == parseInt(unitId));
+  if (!unit || !unit.open) { mostrarAviso('⚠️ Esta unidade está fechada.', 'error'); return; }
   currentUnit = unit;
   Cart.setUnit(unit);
   updateUnitSubtitle();
   renderProducts();
-  showToast(`📍 Unidade ${unit.name} selecionada!`, 'success');
+  mostrarAviso(`📍 Unidade ${unit.name} selecionada!`, 'success');
 }
 
 function updateUnitSubtitle() {
@@ -51,10 +47,12 @@ function updateUnitSubtitle() {
 
 function renderCategories() {
   const list = document.getElementById('category-list');
-  const allBtn = `<button class="category-btn active" onclick="filterCategory('all')" data-cat="all" role="listitem">🍽️ Todos</button>`;
+  const allBtn = `<button class="category-btn active" onclick="filterCategory('all')" data-cat="all" role="listitem" style="display:flex;align-items:center;gap:8px">
+    <img src="${getImgPath('totem.png')}" style="width:18px;height:18px;filter:grayscale(1)"> Todos
+  </button>`;
   const cats = RN_DATA.categories.map(c => `
-    <button class="category-btn" onclick="filterCategory('${c.id}')" data-cat="${c.id}" role="listitem">
-      ${c.icon} ${c.name.replace(/^[^\s]+\s/, '')}
+    <button class="category-btn" onclick="filterCategory('${c.id}')" data-cat="${c.id}" role="listitem" style="display:flex;align-items:center;gap:8px">
+      ${c.icon} ${c.name}
       ${c.seasonal ? '<span class="badge badge-warning" style="margin-left:.3rem">Sazonal</span>' : ''}
     </button>
   `).join('');
@@ -77,14 +75,14 @@ function filterProducts(term) {
 function renderProducts() {
   const container = document.getElementById('products-container');
   if (!currentUnit) {
-    container.innerHTML = `<div class="text-center" style="padding:3rem;color:var(--color-text-light)"><p style="font-size:2rem">📍</p><p>Selecione uma unidade para ver o cardápio</p></div>`;
+    container.innerHTML = `<div class="text-center" style="padding:3rem;color:var(--color-text-light)"><p>Selecione uma unidade para ver o cardápio</p></div>`;
     return;
   }
 
   let products = getProductsByUnit(currentUnit.id);
 
   if (currentCategory !== 'all') {
-    products = products.filter(p => p.category === currentCategory);
+    products = products.filter(p => p.category == currentCategory);
   }
 
   if (searchTerm) {
@@ -95,11 +93,10 @@ function renderProducts() {
   }
 
   if (products.length === 0) {
-    container.innerHTML = `<div class="text-center" style="padding:3rem;color:var(--color-text-light)"><p style="font-size:2rem">🔍</p><p>Nenhum produto encontrado.</p></div>`;
+    container.innerHTML = `<div class="text-center" style="padding:3rem;color:var(--color-text-light)"><p>Nenhum produto encontrado.</p></div>`;
     return;
   }
 
-  // Group by category
   const grouped = {};
   products.forEach(p => {
     if (!grouped[p.category]) grouped[p.category] = [];
@@ -111,9 +108,9 @@ function renderProducts() {
     const cat = RN_DATA.categories.find(c => c.id === catId);
     if (!cat) return;
     html += `
-      <section class="category-section" aria-labelledby="cat-${catId}">
-        <h2 id="cat-${catId}">${cat.name}</h2>
-        <div class="product-grid" role="list">
+      <section class="category-section">
+        <h2>${cat.name}</h2>
+        <div class="product-grid">
           ${prods.map(p => renderProductCard(p)).join('')}
         </div>
       </section>
@@ -124,13 +121,13 @@ function renderProducts() {
 }
 
 function renderProductCard(p) {
-  const cartItems = Cart.getAll();
-  const inCart = cartItems.find(i => i.id === p.id);
+  let cartItems = Cart.getAll();
+  let inCart = cartItems.find(i => i.id == p.id);
   const qty = inCart ? inCart.qty : 0;
 
   return `
-    <article class="product-card ${!p.available ? 'product-unavailable' : ''}" role="listitem" aria-label="${p.name}">
-      <div class="product-img" aria-hidden="true">${p.emoji}</div>
+    <article class="product-card ${!p.available ? 'product-unavailable' : ''}">
+      <div class="product-img">${p.emoji}</div>
       <div class="product-info">
         <h3>${p.name}</h3>
         <p>${p.desc}</p>
@@ -139,10 +136,10 @@ function renderProductCard(p) {
         <div class="product-footer">
           <span class="product-price">${formatCurrency(p.price)}</span>
           ${p.available ? `
-            <div class="qty-control" aria-label="Quantidade de ${p.name}">
-              <button class="qty-btn" onclick="changeQty(${p.id}, -1)" aria-label="Remover um ${p.name}">−</button>
-              <span class="qty-value" id="qty-${p.id}" aria-live="polite">${qty}</span>
-              <button class="qty-btn" onclick="changeQty(${p.id}, 1)" aria-label="Adicionar um ${p.name}">+</button>
+            <div class="qty-control">
+              <button class="qty-btn" onclick="changeQty(${p.id}, -1)">−</button>
+              <span class="qty-value" id="qty-${p.id}">${qty}</span>
+              <button class="qty-btn" onclick="changeQty(${p.id}, 1)">+</button>
             </div>
           ` : '<span style="font-size:.85rem;color:var(--color-text-light)">Indisponível</span>'}
         </div>
@@ -152,24 +149,23 @@ function renderProductCard(p) {
 }
 
 function changeQty(productId, delta) {
-  const product = RN_DATA.products.find(p => p.id === productId);
+  let product = RN_DATA.products.find(p => p.id === productId);
   if (!product) return;
 
   const cartItems = Cart.getAll();
-  const inCart = cartItems.find(i => i.id === productId);
-  const currentQty = inCart ? inCart.qty : 0;
-  const newQty = currentQty + delta;
+  let inCart = cartItems.find(i => i.id == productId);
+  let currentQty = inCart ? inCart.qty : 0;
+  let newQty = currentQty + delta;
 
   if (newQty <= 0) {
     Cart.remove(productId);
-  } else if (currentQty === 0 && delta > 0) {
+  } else if (currentQty == 0 && delta > 0) {
     Cart.add(product, 1);
   } else {
     Cart.updateQty(productId, newQty);
   }
 
-  // Update qty display without full re-render
-  const qtyEl = document.getElementById(`qty-${productId}`);
+  let qtyEl = document.getElementById(`qty-${productId}`);
   if (qtyEl) qtyEl.textContent = Math.max(0, newQty);
 }
 
@@ -180,7 +176,7 @@ function renderPromos() {
     <div style="display:flex;gap:.75rem;overflow-x:auto;padding-bottom:.5rem" role="list" aria-label="Promoções">
       ${RN_DATA.promotions.map(p => `
         <div style="background:linear-gradient(135deg,#C0392B,#E67E22);color:#fff;border-radius:12px;padding:1rem 1.25rem;min-width:220px;flex-shrink:0" role="listitem">
-          <div style="font-size:1.5rem">${p.emoji}</div>
+          <div style="width:40px;height:40px;border-radius:8px;overflow:hidden;margin-bottom:0.5rem;display:flex;align-items:center;justify-content:center">${p.emoji}</div>
           <div style="font-weight:700;margin:.25rem 0">${p.title}</div>
           <div style="font-size:.85rem;opacity:.9">${p.desc}</div>
         </div>

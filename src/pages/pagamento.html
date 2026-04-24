@@ -27,14 +27,13 @@
   <div class="page-header">
     <div class="container">
       <p class="breadcrumb"><a href="../../index.html">Início</a> › <a href="carrinho.html">Carrinho</a> › Pagamento</p>
-      <h1>💳 Pagamento</h1>
+      <h1><img src='https://cdn-icons-png.flaticon.com/512/633/633611.png' style='width:24px;height:24px;vertical-align:middle'> Pagamento</h1>
     </div>
   </div>
 
   <main id="main-content">
     <div class="container payment-layout">
 
-      <!-- Step 1: Resumo + Confirmação -->
       <div id="step-confirm" class="payment-card">
         <h2>Confirmar Pedido</h2>
 
@@ -50,11 +49,11 @@
         </div>
 
         <div class="alert alert-info" style="font-size:.85rem;margin-bottom:1.5rem">
-          🔒 <strong>Pagamento seguro.</strong> Seus dados financeiros são processados por serviço externo certificado (PCI-DSS). A Raízes do Nordeste não armazena dados de cartão.
+          <img src='https://cdn-icons-png.flaticon.com/512/3064/3064155.png' style='width:18px;height:18px;vertical-align:middle'> <strong>Pagamento seguro.</strong> Seus dados financeiros são processados por serviço externo certificado (PCI-DSS). A Raízes do Nordeste não armazena dados de cartão.
         </div>
 
         <div id="payment-method-display" style="background:var(--color-bg);border-radius:8px;padding:1rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem">
-          <span style="font-size:1.5rem" id="pay-method-icon">💳</span>
+          <span style="font-size:1.5rem" id="pay-method-icon"><img src='https://cdn-icons-png.flaticon.com/512/633/633611.png' style='width:24px;height:24px;vertical-align:middle'></span>
           <div>
             <div style="font-weight:600" id="pay-method-name">Cartão de Crédito</div>
             <div style="font-size:.85rem;color:var(--color-text-light)">Forma de pagamento selecionada</div>
@@ -67,19 +66,17 @@
         </button>
       </div>
 
-      <!-- Step 2: Processando -->
       <div id="step-processing" class="payment-card payment-processing hidden">
         <h2>Processando pagamento...</h2>
         <p style="color:var(--color-text-light)">Aguarde enquanto confirmamos seu pagamento com o serviço externo.</p>
         <div class="spinner" aria-label="Carregando"></div>
         <p style="font-size:.85rem;color:var(--color-text-light);text-align:center">
-          🔒 Conexão segura com gateway de pagamento
+          <img src='https://cdn-icons-png.flaticon.com/512/3064/3064155.png' style='width:18px;height:18px;vertical-align:middle'> Conexão segura com gateway de pagamento
         </p>
       </div>
 
-      <!-- Step 3: Sucesso -->
       <div id="step-success" class="payment-card payment-success hidden">
-        <div class="success-icon">🎉</div>
+        <div class="success-icon"><img src='https://cdn-icons-png.flaticon.com/512/2279/2279431.png' style='width:18px;height:18px;vertical-align:middle'></div>
         <h2>Pagamento confirmado!</h2>
         <p style="color:var(--color-text-light);margin:.75rem 0 1.5rem">
           Seu pedido foi recebido e está sendo preparado.
@@ -103,7 +100,6 @@
         </a>
       </div>
 
-      <!-- Step 4: Erro -->
       <div id="step-error" class="payment-card hidden" style="text-align:center;padding:2rem">
         <div style="font-size:3rem;margin-bottom:1rem">❌</div>
         <h2 style="color:var(--color-error)">Pagamento recusado</h2>

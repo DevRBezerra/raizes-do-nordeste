@@ -1,10 +1,6 @@
-/* =============================================
-   CART — Gerenciamento do carrinho (localStorage)
-   ============================================= */
-
 const Cart = (() => {
   const KEY = 'rn_cart';
-  const UNIT_KEY = 'rn_unit';
+  let UNIT_KEY = 'rn_unit';
 
   function getAll() {
     try { return JSON.parse(localStorage.getItem(KEY)) || []; }
@@ -17,15 +13,15 @@ const Cart = (() => {
   }
 
   function add(product, qty = 1) {
-    const items = getAll();
-    const idx = items.findIndex(i => i.id === product.id);
+    let items = getAll();
+    let idx = items.findIndex(i => i.id === product.id);
     if (idx >= 0) {
       items[idx].qty += qty;
     } else {
       items.push({ id: product.id, name: product.name, price: product.price, emoji: product.emoji, qty });
     }
     save(items);
-    showToast(`✅ ${product.name} adicionado ao carrinho!`, 'success');
+    mostrarAviso(`✅ ${product.name} adicionado ao carrinho!`, 'success');
   }
 
   function remove(productId) {
@@ -35,7 +31,7 @@ const Cart = (() => {
   function updateQty(productId, qty) {
     if (qty <= 0) { remove(productId); return; }
     const items = getAll();
-    const idx = items.findIndex(i => i.id === productId);
+    const idx = items.findIndex(i => i.id == productId);
     if (idx >= 0) { items[idx].qty = qty; save(items); }
   }
 
@@ -61,23 +57,19 @@ const Cart = (() => {
 
   function setUnit(unit) { localStorage.setItem(UNIT_KEY, JSON.stringify(unit)); }
 
-  // Init badge on load
   document.addEventListener('DOMContentLoaded', updateBadge);
 
   return { getAll, add, remove, updateQty, clear, count, subtotal, getUnit, setUnit, updateBadge };
 })();
 
-/* =============================================
-   TOAST NOTIFICATIONS
-   ============================================= */
-function showToast(message, type = 'info', duration = 3000) {
+function mostrarAviso(message, type = 'info', duration = 3000) {
   let container = document.querySelector('.toast-container');
   if (!container) {
     container = document.createElement('div');
     container.className = 'toast-container';
     document.body.appendChild(container);
   }
-  const toast = document.createElement('div');
+  let toast = document.createElement('div');
   toast.className = `toast ${type}`;
   toast.textContent = message;
   container.appendChild(toast);
