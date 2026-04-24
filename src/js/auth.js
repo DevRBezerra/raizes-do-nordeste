@@ -26,10 +26,11 @@ function fazerLogin(e) {
   }
   if (!valid) return;
 
-  if (email === 'maria@email.com' && password === '123456') {
+  // Login com o usuário padrão (Renan)
+  if (email === 'renan@email.com' && password === '123456') {
     sucessoLogin(RN_DATA.mockUser);
   } else if (password.length >= 6) {
-    
+    // Permite login com qualquer outro e-mail para testes
     sucessoLogin({ name: email.split('@')[0], email, points: 0, tier: 'Semente' });
   } else {
     exibirAlerta('login-error', '❌ E-mail ou senha incorretos. Tente novamente.');
@@ -83,6 +84,11 @@ function criarConta(e) {
   localStorage.setItem('rn_user', JSON.stringify(newUser));
   mostrarAviso('🎉 Conta criada! Você ganhou 100 pontos de boas-vindas!', 'success');
   setTimeout(() => { window.location.href = '../../index.html'; }, 1200);
+}
+
+function logout() {
+  if (!confirm('Deseja sair da sua conta?')) return;
+  Auth.logout();
 }
 
 function togglePassword(inputId, btn) {

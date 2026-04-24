@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  let user = getLoggedUser() || RN_DATA.mockUser;
+  let user = Auth.getUser();
+  if (!user) return; // Redirecionamento já tratado pelo Auth.protectPage
+
   loadProfile(user);
   renderOrders();
 });
@@ -23,10 +25,13 @@ function showSection(section) {
 
 function saveProfile(e) {
   e.preventDefault();
-  let user = getLoggedUser() || RN_DATA.mockUser;
+  let user = Auth.getUser();
+  if (!user) return;
+
   user.name  = document.getElementById('p-name').value.trim();
   user.email = document.getElementById('p-email').value.trim();
   user.phone = document.getElementById('p-phone').value.trim();
+  
   localStorage.setItem('rn_user', JSON.stringify(user));
   loadProfile(user);
   mostrarAviso('✅ Dados atualizados com sucesso!', 'success');
@@ -54,9 +59,7 @@ function renderOrders() {
 
 function logout() {
   if (!confirm('Deseja sair da sua conta?')) return;
-  localStorage.removeItem('rn_user');
-  mostrarAviso('👋 Até logo!', 'info');
-  setTimeout(() => { window.location.href = '../../index.html'; }, 800);
+  Auth.logout();
 }
 
 function requestDelete() {

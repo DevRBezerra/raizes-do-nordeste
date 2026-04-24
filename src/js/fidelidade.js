@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const user = getLoggedUser() || RN_DATA.mockUser;
+  const user = Auth.getUser();
+  if (!user) return; // Auth.protectPage já redireciona se não houver usuário
+
   renderPointsCard(user);
   renderTiers(user.points);
   renderRewards(user.points);
@@ -82,7 +84,7 @@ function redeemReward(rewardId, cost) {
   let reward = RN_DATA.rewards.find(r => r.id == rewardId);
   if (!reward) return;
 
-  const user = getLoggedUser() || RN_DATA.mockUser;
+  const user = Auth.getUser();
   if (user.points < cost) {
     mostrarAviso('⚠️ Pontos insuficientes para este resgate.', 'error');
     return;

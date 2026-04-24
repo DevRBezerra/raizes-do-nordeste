@@ -4,9 +4,59 @@ const getImgPath = (name) => {
   return base + name;
 };
 
-// Banco de dados principal do app
-let RN_DATA = {
+// Módulo de Autenticação
+const Auth = (() => {
+  const USER_KEY = 'rn_user';
+  
+  const getUser = () => {
+    try { return JSON.parse(localStorage.getItem(USER_KEY)); }
+    catch { return null; }
+  };
 
+  const isLoggedIn = () => !!getUser();
+
+  const logout = () => {
+    localStorage.removeItem(USER_KEY);
+    window.location.reload();
+  };
+
+  const initHeader = () => {
+    const btnLogin = document.getElementById('btn-login');
+    const user = getUser();
+    
+    if (btnLogin && user) {
+      const firstName = user.name.split(' ')[0];
+      const isSub = window.location.pathname.includes('/src/pages/');
+      const profileUrl = isSub ? 'perfil.html' : 'src/pages/perfil.html';
+      
+      btnLogin.parentElement.innerHTML = `
+        <a href="${profileUrl}" class="nav-link" style="font-weight:600;color:var(--color-primary);display:flex;align-items:center;gap:5px">
+          <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" style="width:20px;height:20px">
+          Olá, ${firstName}
+        </a>
+      `;
+    }
+  };
+
+  // Proteção de rotas
+  const protectPage = () => {
+    const protectedPages = ['perfil.html', 'fidelidade.html', 'pagamento.html'];
+    const currentPage = window.location.pathname.split('/').pop();
+    
+    if (protectedPages.includes(currentPage) && !isLoggedIn()) {
+      window.location.href = 'login.html?redirect=' + currentPage;
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initHeader();
+    protectPage();
+  });
+
+  return { getUser, isLoggedIn, logout };
+})();
+
+let RN_DATA = {
   units: [
     { id: 1, name: "Recife Centro",    city: "Recife – PE",    open: true,  hours: "06h–22h", emoji: `<img src='${getImgPath("recife-centro.jpeg")}' style='width:24px;height:24px;'>`, type: "completa" },
     { id: 2, name: "Fortaleza Aldeota", city: "Fortaleza – CE", open: true,  hours: "07h–21h", emoji: `<img src='${getImgPath("fortaleza-adeota.jpeg")}' style='width:24px;height:24px;'>`, type: "completa" },
