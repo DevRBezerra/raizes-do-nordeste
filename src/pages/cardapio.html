@@ -77,7 +77,6 @@
   <main id="main-content">
     <div class="container cardapio-layout">
 
-      <!-- Sidebar -->
       <aside class="cardapio-sidebar" aria-label="Filtros do cardápio">
         <div class="unit-selector">
           <label for="unit-select">📍 Unidade</label>
@@ -87,22 +86,19 @@
         </div>
         <h3>Categorias</h3>
         <div class="category-list" id="category-list" role="list">
-          <!-- Preenchido via JS -->
+          
         </div>
       </aside>
 
-      <!-- Main content -->
       <div class="cardapio-main">
-        <!-- Promoções -->
+        
         <div id="promo-banner" style="margin-bottom:1.5rem"></div>
 
-        <!-- Search -->
         <div class="cardapio-search" role="search">
           <span class="search-icon" aria-hidden="true">🔍</span>
           <input type="search" id="search-input" placeholder="Buscar produto..." aria-label="Buscar produto no cardápio" oninput="filterProducts(this.value)" />
         </div>
 
-        <!-- Products -->
         <div id="products-container" aria-live="polite" aria-label="Lista de produtos">
           <div class="text-center" style="padding:3rem;color:var(--color-text-light)">
             <p style="font-size:2rem">📍</p>

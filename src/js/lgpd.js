@@ -1,8 +1,4 @@
-/* =============================================
-   LGPD — Consentimento e preferências
-   ============================================= */
-
-const LGPD = (() => {
+let LGPD = (() => {
   const KEY = 'rn_lgpd_consent';
 
   function hasConsent() {
@@ -20,7 +16,7 @@ const LGPD = (() => {
 
   function init() {
     if (!hasConsent()) {
-      const banner = document.getElementById('lgpd-banner');
+      let banner = document.getElementById('lgpd-banner');
       if (banner) banner.classList.remove('hidden');
     }
   }
@@ -30,9 +26,9 @@ const LGPD = (() => {
 
 function acceptLGPD() {
   LGPD.savePrefs({ essential: true, personalization: true, fidelity: true, analytics: true });
-  const banner = document.getElementById('lgpd-banner');
+  let banner = document.getElementById('lgpd-banner');
   if (banner) banner.classList.add('hidden');
-  showToast('✅ Preferências salvas. Obrigado!', 'success');
+  mostrarAviso('✅ Preferências salvas. Obrigado!', 'success');
 }
 
 function savePrivacyPrefs() {
@@ -43,14 +39,14 @@ function savePrivacyPrefs() {
     analytics: document.getElementById('pref-analytics')?.checked ?? false,
   };
   LGPD.savePrefs(prefs);
-  const banner = document.getElementById('lgpd-banner');
+  let banner = document.getElementById('lgpd-banner');
   if (banner) banner.classList.add('hidden');
   closePrivacyModal();
-  showToast('✅ Preferências de privacidade salvas!', 'success');
+  mostrarAviso('✅ Preferências de privacidade salvas!', 'success');
 }
 
 function openPrivacyModal() {
-  const modal = document.getElementById('privacy-modal');
+  let modal = document.getElementById('privacy-modal');
   if (modal) modal.classList.remove('hidden');
 }
 
@@ -59,12 +55,11 @@ function closePrivacyModal() {
   if (modal) modal.classList.add('hidden');
 }
 
-// Mobile menu toggle
 document.addEventListener('DOMContentLoaded', () => {
   LGPD.init();
 
   const toggle = document.getElementById('menu-toggle');
-  const mobileNav = document.getElementById('mobile-nav');
+  let mobileNav = document.getElementById('mobile-nav');
   if (toggle && mobileNav) {
     toggle.addEventListener('click', () => {
       const isOpen = !mobileNav.classList.contains('hidden');
@@ -74,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Update login button if user is logged in
   const user = getLoggedUser();
   const btnLogin = document.getElementById('btn-login');
   if (user && btnLogin) {

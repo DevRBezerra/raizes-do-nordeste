@@ -54,20 +54,18 @@
     <div class="auth-layout">
       <div class="auth-card">
 
-        <!-- Tabs -->
         <div style="display:flex;gap:.5rem;margin-bottom:1.5rem" role="tablist" aria-label="Entrar ou Cadastrar">
           <button class="btn-primary" id="tab-login" onclick="showTab('login')" role="tab" aria-selected="true" style="flex:1">Entrar</button>
           <button class="btn-outline" id="tab-register" onclick="showTab('register')" role="tab" aria-selected="false" style="flex:1">Cadastrar</button>
         </div>
 
-        <!-- Login Form -->
         <div id="form-login" role="tabpanel" aria-labelledby="tab-login">
           <h1>Bem-vindo de volta! 👋</h1>
           <p class="subtitle">Entre para acessar seus pedidos e pontos.</p>
 
           <div id="login-error" class="alert alert-error hidden" role="alert"></div>
 
-          <form id="login-form" onsubmit="handleLogin(event)" novalidate>
+          <form id="login-form" onsubmit="fazerLogin(event)" novalidate>
             <div class="form-group">
               <label class="form-label" for="login-email">E-mail</label>
               <input class="form-input" type="email" id="login-email" name="email"
@@ -97,20 +95,18 @@
           <div class="auth-divider">ou</div>
           <p class="auth-footer">Não tem conta? <a href="#" onclick="showTab('register')">Cadastre-se grátis</a></p>
 
-          <!-- Demo hint -->
           <div class="alert alert-info" style="margin-top:1rem;font-size:.85rem">
             💡 <strong>Demo:</strong> use <code>maria@email.com</code> / <code>123456</code>
           </div>
         </div>
 
-        <!-- Register Form -->
         <div id="form-register" class="hidden" role="tabpanel" aria-labelledby="tab-register">
           <h1>Criar conta 🌵</h1>
           <p class="subtitle">Cadastre-se e comece a acumular pontos!</p>
 
           <div id="register-error" class="alert alert-error hidden" role="alert"></div>
 
-          <form id="register-form" onsubmit="handleRegister(event)" novalidate>
+          <form id="register-form" onsubmit="criarConta(event)" novalidate>
             <div class="form-group">
               <label class="form-label" for="reg-name">Nome completo</label>
               <input class="form-input" type="text" id="reg-name" name="name"
@@ -149,7 +145,6 @@
               <span class="form-error hidden" id="reg-pass-error" role="alert"></span>
             </div>
 
-            <!-- LGPD Consent -->
             <div style="background:#fde8e6;border-radius:8px;padding:1rem;margin-bottom:1rem">
               <p style="font-size:.85rem;font-weight:600;margin-bottom:.75rem">🔒 Consentimento de dados (LGPD)</p>
               <label style="display:flex;gap:.5rem;align-items:flex-start;margin-bottom:.5rem;cursor:pointer">

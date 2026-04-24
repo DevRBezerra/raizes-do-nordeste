@@ -1,7 +1,3 @@
-/* =============================================
-   CARDÁPIO PAGE
-   ============================================= */
-
 let currentUnit = null;
 let currentCategory = 'all';
 let searchTerm = '';
@@ -11,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCategories();
   renderPromos();
 
-  const saved = Cart.getUnit();
+  let saved = Cart.getUnit();
   if (saved) {
     currentUnit = saved;
     document.getElementById('unit-select').value = saved.id;
@@ -21,9 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function populateUnitSelect() {
-  const sel = document.getElementById('unit-select');
+  let sel = document.getElementById('unit-select');
   RN_DATA.units.forEach(u => {
-    const opt = document.createElement('option');
+    let opt = document.createElement('option');
     opt.value = u.id;
     opt.textContent = `${u.emoji} ${u.name} — ${u.open ? 'Aberta' : 'Fechada'}`;
     if (!u.open) opt.disabled = true;
@@ -33,13 +29,13 @@ function populateUnitSelect() {
 
 function changeUnit(unitId) {
   if (!unitId) { currentUnit = null; renderProducts(); return; }
-  const unit = RN_DATA.units.find(u => u.id === parseInt(unitId));
-  if (!unit || !unit.open) { showToast('⚠️ Esta unidade está fechada.', 'error'); return; }
+  let unit = RN_DATA.units.find(u => u.id == parseInt(unitId));
+  if (!unit || !unit.open) { mostrarAviso('⚠️ Esta unidade está fechada.', 'error'); return; }
   currentUnit = unit;
   Cart.setUnit(unit);
   updateUnitSubtitle();
   renderProducts();
-  showToast(`📍 Unidade ${unit.name} selecionada!`, 'success');
+  mostrarAviso(`📍 Unidade ${unit.name} selecionada!`, 'success');
 }
 
 function updateUnitSubtitle() {
@@ -84,7 +80,7 @@ function renderProducts() {
   let products = getProductsByUnit(currentUnit.id);
 
   if (currentCategory !== 'all') {
-    products = products.filter(p => p.category === currentCategory);
+    products = products.filter(p => p.category == currentCategory);
   }
 
   if (searchTerm) {
@@ -99,7 +95,6 @@ function renderProducts() {
     return;
   }
 
-  // Group by category
   const grouped = {};
   products.forEach(p => {
     if (!grouped[p.category]) grouped[p.category] = [];
@@ -124,8 +119,8 @@ function renderProducts() {
 }
 
 function renderProductCard(p) {
-  const cartItems = Cart.getAll();
-  const inCart = cartItems.find(i => i.id === p.id);
+  let cartItems = Cart.getAll();
+  let inCart = cartItems.find(i => i.id == p.id);
   const qty = inCart ? inCart.qty : 0;
 
   return `
@@ -152,24 +147,23 @@ function renderProductCard(p) {
 }
 
 function changeQty(productId, delta) {
-  const product = RN_DATA.products.find(p => p.id === productId);
+  let product = RN_DATA.products.find(p => p.id === productId);
   if (!product) return;
 
   const cartItems = Cart.getAll();
-  const inCart = cartItems.find(i => i.id === productId);
-  const currentQty = inCart ? inCart.qty : 0;
-  const newQty = currentQty + delta;
+  let inCart = cartItems.find(i => i.id == productId);
+  let currentQty = inCart ? inCart.qty : 0;
+  let newQty = currentQty + delta;
 
   if (newQty <= 0) {
     Cart.remove(productId);
-  } else if (currentQty === 0 && delta > 0) {
+  } else if (currentQty == 0 && delta > 0) {
     Cart.add(product, 1);
   } else {
     Cart.updateQty(productId, newQty);
   }
 
-  // Update qty display without full re-render
-  const qtyEl = document.getElementById(`qty-${productId}`);
+  let qtyEl = document.getElementById(`qty-${productId}`);
   if (qtyEl) qtyEl.textContent = Math.max(0, newQty);
 }
 

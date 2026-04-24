@@ -1,7 +1,3 @@
-/* =============================================
-   FIDELIDADE PAGE
-   ============================================= */
-
 document.addEventListener('DOMContentLoaded', () => {
   const user = getLoggedUser() || RN_DATA.mockUser;
   renderPointsCard(user);
@@ -12,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderPointsCard(user) {
   const tier = getUserTier(user.points);
-  const nextTier = RN_DATA.tiers.find(t => t.min > user.points);
-  const progress = nextTier
+  let nextTier = RN_DATA.tiers.find(t => t.min > user.points);
+  let progress = nextTier
     ? Math.round(((user.points - tier.min) / (nextTier.min - tier.min)) * 100)
     : 100;
 
@@ -40,13 +36,13 @@ function renderPointsCard(user) {
 function renderTiers(userPoints) {
   const grid = document.getElementById('tiers-grid');
   grid.innerHTML = RN_DATA.tiers.map(tier => {
-    const isActive = userPoints >= tier.min && (tier.max === Infinity || userPoints <= tier.max);
+    let isActive = userPoints >= tier.min && (tier.max === Infinity || userPoints <= tier.max);
     return `
       <div style="background:var(--color-surface);border-radius:12px;padding:1.25rem;box-shadow:var(--shadow-sm);border:2px solid ${isActive ? tier.color : 'var(--color-border)'}">
         <div style="font-size:2rem;margin-bottom:.5rem">${tier.emoji}</div>
         <h3 style="color:${tier.color}">${tier.name}</h3>
         <p style="font-size:.85rem;color:var(--color-text-light)">
-          ${tier.max === Infinity ? `${tier.min}+ pontos` : `${tier.min}–${tier.max} pontos`}
+          ${tier.max == Infinity ? `${tier.min}+ pontos` : `${tier.min}–${tier.max} pontos`}
         </p>
         ${isActive ? '<span class="badge badge-success" style="margin-top:.5rem">Seu nível atual</span>' : ''}
       </div>
@@ -55,7 +51,7 @@ function renderTiers(userPoints) {
 }
 
 function renderRewards(userPoints) {
-  const grid = document.getElementById('rewards-grid');
+  let grid = document.getElementById('rewards-grid');
   grid.innerHTML = RN_DATA.rewards.map(r => {
     const canRedeem = userPoints >= r.cost;
     return `
@@ -80,12 +76,12 @@ function renderRewards(userPoints) {
 }
 
 function redeemReward(rewardId, cost) {
-  const reward = RN_DATA.rewards.find(r => r.id === rewardId);
+  let reward = RN_DATA.rewards.find(r => r.id == rewardId);
   if (!reward) return;
 
   const user = getLoggedUser() || RN_DATA.mockUser;
   if (user.points < cost) {
-    showToast('⚠️ Pontos insuficientes para este resgate.', 'error');
+    mostrarAviso('⚠️ Pontos insuficientes para este resgate.', 'error');
     return;
   }
 
@@ -93,14 +89,14 @@ function redeemReward(rewardId, cost) {
 
   user.points -= cost;
   localStorage.setItem('rn_user', JSON.stringify(user));
-  showToast(`🎁 "${reward.name}" resgatado com sucesso!`, 'success');
+  mostrarAviso(`🎁 "${reward.name}" resgatado com sucesso!`, 'success');
   renderPointsCard(user);
   renderTiers(user.points);
   renderRewards(user.points);
 }
 
 function renderHistory() {
-  const tbody = document.getElementById('history-body');
+  let tbody = document.getElementById('history-body');
   tbody.innerHTML = RN_DATA.pointsHistory.map(h => `
     <tr>
       <td>${h.date}</td>

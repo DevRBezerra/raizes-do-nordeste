@@ -1,9 +1,4 @@
-/* =============================================
-   MOCK DATA — Raízes do Nordeste
-   Simula dados que viriam de uma API real
-   ============================================= */
-
-const RN_DATA = {
+let RN_DATA = {
 
   units: [
     { id: 1, name: "Recife Centro",    city: "Recife – PE",    open: true,  hours: "06h–22h", emoji: "🏙️", type: "completa" },
@@ -25,32 +20,32 @@ const RN_DATA = {
   ],
 
   products: [
-    // Café da Manhã
+    
     { id: 1,  category: "cafe",    name: "Café com Leite",          desc: "Café coado na hora com leite integral quentinho.",                price: 6.00,  emoji: "☕", available: true,  units: [1,2,3,4,5,6] },
     { id: 2,  category: "cafe",    name: "Café Preto",              desc: "Café forte e encorpado, passado na hora.",                        price: 4.00,  emoji: "🫖", available: true,  units: [1,2,3,4,5,6] },
     { id: 3,  category: "cafe",    name: "Café da Manhã Completo",  desc: "Café, cuscuz, tapioca, manteiga de garrafa e queijo coalho.",     price: 22.90, emoji: "🍽️", available: true,  units: [1,2,4,6] },
-    // Tapiocas
+    
     { id: 4,  category: "tapioca", name: "Tapioca Simples",         desc: "Tapioca tradicional com manteiga de garrafa.",                    price: 8.50,  emoji: "🫓", available: true,  units: [1,2,3,4,5,6] },
     { id: 5,  category: "tapioca", name: "Tapioca de Queijo Coalho",desc: "Tapioca recheada com queijo coalho grelhado.",                    price: 12.00, emoji: "🧀", available: true,  units: [1,2,3,4,5,6] },
     { id: 6,  category: "tapioca", name: "Tapioca de Frango",       desc: "Tapioca com frango desfiado temperado e catupiry.",               price: 14.50, emoji: "🍗", available: true,  units: [1,2,4,6] },
     { id: 7,  category: "tapioca", name: "Tapioca de Carne Seca",   desc: "Tapioca com carne seca desfiada e manteiga de garrafa.",          price: 16.00, emoji: "🥩", available: true,  units: [1,2,4,6] },
     { id: 8,  category: "tapioca", name: "Tapioca Doce de Coco",    desc: "Tapioca com coco ralado e leite condensado.",                     price: 10.00, emoji: "🥥", available: true,  units: [1,2,3,4,5,6] },
-    // Cuscuz
+    
     { id: 9,  category: "cuscuz",  name: "Cuscuz Simples",          desc: "Cuscuz de milho com manteiga de garrafa.",                        price: 7.00,  emoji: "🌽", available: true,  units: [1,2,3,4,5,6] },
     { id: 10, category: "cuscuz",  name: "Cuscuz com Ovo",          desc: "Cuscuz com ovo mexido e manteiga.",                               price: 9.50,  emoji: "🍳", available: true,  units: [1,2,3,4,5,6] },
     { id: 11, category: "cuscuz",  name: "Cuscuz Recheado",         desc: "Cuscuz com carne seca, queijo e pimentão.",                       price: 15.00, emoji: "🥘", available: true,  units: [1,2,4,6] },
-    // Bolos
+    
     { id: 12, category: "bolos",   name: "Bolo de Macaxeira",       desc: "Bolo úmido de macaxeira com coco ralado.",                        price: 8.00,  emoji: "🎂", available: true,  units: [1,2,3,4,5,6] },
     { id: 13, category: "bolos",   name: "Bolo de Milho",           desc: "Bolo de milho cremoso, receita da Dona Francisca.",               price: 8.00,  emoji: "🌽", available: true,  units: [1,2,3,4,5,6] },
     { id: 14, category: "bolos",   name: "Bolo de Rolo",            desc: "Bolo de rolo pernambucano com goiabada.",                         price: 9.50,  emoji: "🍥", available: true,  units: [1,4] },
-    // Sucos
+    
     { id: 15, category: "sucos",   name: "Suco de Umbu",            desc: "Suco natural de umbu, fruta típica do sertão.",                   price: 9.00,  emoji: "🍹", available: true,  units: [1,2,4,6] },
     { id: 16, category: "sucos",   name: "Suco de Cajá",            desc: "Suco de cajá gelado, refrescante e tropical.",                    price: 9.00,  emoji: "🥭", available: true,  units: [1,2,3,4,5,6] },
     { id: 17, category: "sucos",   name: "Suco de Maracujá",        desc: "Suco de maracujá natural com ou sem açúcar.",                     price: 8.00,  emoji: "🍊", available: true,  units: [1,2,3,4,5,6] },
-    // Combos
+    
     { id: 18, category: "combos",  name: "Combo Nordestino",        desc: "Cuscuz + Tapioca de queijo + Café com leite.",                    price: 24.90, emoji: "🍱", available: true,  units: [1,2,4,6] },
     { id: 19, category: "combos",  name: "Combo Família",           desc: "2 Cuscuz + 2 Tapiocas + 2 Sucos. Serve 2 pessoas.",              price: 44.90, emoji: "👨‍👩‍👧", available: true,  units: [1,2,4,6] },
-    // Junino (sazonal)
+    
     { id: 20, category: "junino",  name: "Pamonha",                 desc: "Pamonha de milho verde, doce ou salgada. Disponível em junho.",   price: 7.00,  emoji: "🌽", available: false, units: [1,2,4,6], seasonal: true },
     { id: 21, category: "junino",  name: "Canjica",                 desc: "Canjica cremosa com coco e canela. Especial junino.",             price: 10.00, emoji: "🍮", available: false, units: [1,2,4,6], seasonal: true },
     { id: 22, category: "junino",  name: "Pé de Moleque",           desc: "Pé de moleque artesanal com amendoim torrado.",                   price: 5.00,  emoji: "🍬", available: false, units: [1,2,3,4,5,6], seasonal: true },
@@ -120,7 +115,6 @@ const RN_DATA = {
   },
 };
 
-// Helpers
 function getProductsByUnit(unitId) {
   return RN_DATA.products.filter(p => p.units.includes(unitId));
 }

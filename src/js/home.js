@@ -1,20 +1,16 @@
-/* =============================================
-   HOME PAGE — Renderização dinâmica
-   ============================================= */
-
 document.addEventListener('DOMContentLoaded', () => {
   renderUnits();
   renderHighlights();
 });
 
 function renderUnits() {
-  const grid = document.getElementById('unit-grid');
+  let grid = document.getElementById('unit-grid');
   if (!grid) return;
 
-  const selectedUnit = Cart.getUnit();
+  let selectedUnit = Cart.getUnit();
 
   grid.innerHTML = RN_DATA.units.map(unit => `
-    <div class="unit-card ${selectedUnit?.id === unit.id ? 'selected' : ''}"
+    <div class="unit-card ${selectedUnit?.id == unit.id ? 'selected' : ''}"
          role="listitem"
          tabindex="0"
          onclick="selectUnit(${unit.id})"
@@ -24,7 +20,7 @@ function renderUnits() {
       <div class="unit-info">
         <h3>${unit.name}</h3>
         <p>${unit.city} · ${unit.hours}</p>
-        <p style="font-size:.8rem;color:var(--color-text-light)">${unit.type === 'completa' ? 'Cardápio completo' : 'Cardápio reduzido'}</p>
+        <p style="font-size:.8rem;color:var(--color-text-light)">${unit.type == 'completa' ? 'Cardápio completo' : 'Cardápio reduzido'}</p>
       </div>
       <div class="unit-status">
         <span class="badge ${unit.open ? 'badge-success' : 'badge-error'}">
@@ -36,15 +32,15 @@ function renderUnits() {
 }
 
 function selectUnit(unitId) {
-  const unit = RN_DATA.units.find(u => u.id === unitId);
+  let unit = RN_DATA.units.find(u => u.id == unitId);
   if (!unit) return;
   if (!unit.open) {
-    showToast('⚠️ Esta unidade está fechada no momento.', 'error');
+    mostrarAviso('⚠️ Esta unidade está fechada no momento.', 'error');
     return;
   }
   Cart.setUnit(unit);
   renderUnits();
-  showToast(`📍 Unidade ${unit.name} selecionada!`, 'success');
+  mostrarAviso(`📍 Unidade ${unit.name} selecionada!`, 'success');
   setTimeout(() => {
     window.location.href = 'src/pages/cardapio.html';
   }, 800);
@@ -54,8 +50,7 @@ function renderHighlights() {
   const grid = document.getElementById('highlights-grid');
   if (!grid) return;
 
-  // Pega produtos disponíveis e mostra os primeiros 4
-  const featured = RN_DATA.products
+  let featured = RN_DATA.products
     .filter(p => p.available && !p.seasonal)
     .slice(0, 4);
 

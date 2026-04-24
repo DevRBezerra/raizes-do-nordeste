@@ -61,7 +61,6 @@
     <div class="container profile-layout">
       <div class="profile-grid">
 
-        <!-- Sidebar -->
         <aside class="profile-sidebar" aria-label="Menu do perfil">
           <div class="profile-avatar" aria-hidden="true">👤</div>
           <h2 id="profile-name">Carregando...</h2>
@@ -74,10 +73,8 @@
           </nav>
         </aside>
 
-        <!-- Content -->
         <div>
 
-          <!-- Dados -->
           <section id="section-data" aria-labelledby="data-title">
             <div style="background:var(--color-surface);border-radius:12px;padding:1.5rem;box-shadow:var(--shadow-sm)">
               <h2 id="data-title" style="margin-bottom:1.25rem">Meus Dados</h2>
@@ -99,7 +96,6 @@
             </div>
           </section>
 
-          <!-- Pedidos -->
           <section id="section-orders" class="hidden" aria-labelledby="orders-title">
             <div style="background:var(--color-surface);border-radius:12px;padding:1.5rem;box-shadow:var(--shadow-sm)">
               <h2 id="orders-title" style="margin-bottom:1.25rem">Meus Pedidos</h2>
@@ -107,7 +103,6 @@
             </div>
           </section>
 
-          <!-- Privacidade -->
           <section id="section-privacy" class="hidden" aria-labelledby="privacy-title">
             <div style="background:var(--color-surface);border-radius:12px;padding:1.5rem;box-shadow:var(--shadow-sm)">
               <h2 id="privacy-title" style="margin-bottom:1rem">Privacidade e Dados (LGPD)</h2>
@@ -118,7 +113,7 @@
               <div style="display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.5rem">
                 <div style="background:var(--color-bg);border-radius:8px;padding:1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem">
                   <div><strong>📋 Acessar meus dados</strong><p style="font-size:.85rem;color:var(--color-text-light)">Baixe uma cópia de todos os seus dados.</p></div>
-                  <button class="btn-outline btn-sm" onclick="showToast('📧 Solicitação enviada! Você receberá um e-mail em até 15 dias.','info')">Solicitar</button>
+                  <button class="btn-outline btn-sm" onclick="mostrarAviso('📧 Solicitação enviada! Você receberá um e-mail em até 15 dias.','info')">Solicitar</button>
                 </div>
                 <div style="background:var(--color-bg);border-radius:8px;padding:1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem">
                   <div><strong>✏️ Corrigir meus dados</strong><p style="font-size:.85rem;color:var(--color-text-light)">Atualize informações incorretas.</p></div>

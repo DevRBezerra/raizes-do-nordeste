@@ -1,8 +1,3 @@
-/* =============================================
-   HOME PAGE
-   ============================================= */
-
-/* Hero */
 .hero {
   background: linear-gradient(135deg, #C0392B 0%, #E67E22 100%);
   color: #fff;
@@ -30,7 +25,6 @@
   flex-shrink: 0;
 }
 
-/* Units */
 .section-unit { padding: 3rem 0; }
 .section-unit h2 { margin-bottom: .25rem; }
 .unit-grid {
@@ -60,7 +54,6 @@
 .unit-info p  { font-size: .88rem; color: var(--color-text-light); }
 .unit-status  { margin-left: auto; flex-shrink: 0; }
 
-/* Highlights */
 .section-highlights { padding: 3rem 0; background: var(--color-surface); }
 .section-highlights h2 { margin-bottom: 1.5rem; }
 .highlights-grid {
@@ -90,7 +83,6 @@
 .highlight-price { color: var(--color-primary); font-weight: 700; font-size: 1rem; }
 .highlight-old   { text-decoration: line-through; color: var(--color-text-light); font-size: .85rem; margin-right: .4rem; }
 
-/* Channels */
 .section-channels { padding: 3rem 0; }
 .section-channels h2 { margin-bottom: 1.5rem; }
 .channels-grid {
@@ -111,7 +103,6 @@
 .channel-card h3 { margin-bottom: .4rem; }
 .channel-card p  { font-size: .88rem; color: var(--color-text-light); }
 
-/* Fidelity CTA */
 .section-fidelity {
   background: linear-gradient(135deg, #2C3E50, #34495E);
   color: #fff;
@@ -136,7 +127,6 @@
   border: 2px solid rgba(255,255,255,.2);
 }
 
-/* Responsive */
 @media (min-width: 640px) {
   .unit-grid { grid-template-columns: repeat(2, 1fr); }
   .highlights-grid { grid-template-columns: repeat(3, 1fr); }
