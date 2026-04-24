@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Pedido — Raízes do Nordeste</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/pages.css" />
+</head>
+<body>
+
+  <header class="header" role="banner">
+    <div class="container header-inner">
+      <a href="../../index.html" class="logo"><span class="logo-icon">🌵</span><span class="logo-text">Raízes do Nordeste</span></a>
+      <nav class="nav" role="navigation" aria-label="Menu principal">
+        <a href="../../index.html" class="nav-link">Início</a>
+        <a href="cardapio.html" class="nav-link">Cardápio</a>
+        <a href="pedido.html" class="nav-link active">Meu Pedido</a>
+        <a href="fidelidade.html" class="nav-link">Fidelidade</a>
+      </nav>
+      <div class="header-actions">
+        <a href="login.html" class="btn-outline" id="btn-login">Entrar</a>
+        <a href="carrinho.html" class="btn-cart" aria-label="Ver carrinho">🛒 <span id="cart-count" class="cart-badge">0</span></a>
+      </div>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    </div>
+    <nav class="mobile-nav hidden" id="mobile-nav">
+      <a href="../../index.html" class="mobile-nav-link">Início</a>
+      <a href="cardapio.html" class="mobile-nav-link">Cardápio</a>
+      <a href="pedido.html" class="mobile-nav-link">Meu Pedido</a>
+      <a href="fidelidade.html" class="mobile-nav-link">Fidelidade</a>
+      <a href="login.html" class="mobile-nav-link">Entrar / Cadastrar</a>
+    </nav>
+  </header>
+
+  <div class="page-header">
+    <div class="container">
+      <p class="breadcrumb"><a href="../../index.html">Início</a> › Meu Pedido</p>
+      <h1>📦 Acompanhar Pedido</h1>
+      <p>Acompanhe o status do seu pedido em tempo real</p>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <div class="container status-layout">
+      <div id="status-container" aria-live="polite"></div>
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-bottom"><p>© 2026 Raízes do Nordeste. Todos os direitos reservados.</p></div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/lgpd.js"></script>
+  <script src="../js/pedido.js"></script>
+</body>
+</html>

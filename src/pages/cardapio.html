@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cardápio — Raízes do Nordeste</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/pages.css" />
+</head>
+<body>
+
+  <div id="lgpd-banner" class="lgpd-banner hidden" role="dialog" aria-labelledby="lgpd-title" aria-modal="true">
+    <div class="lgpd-content">
+      <h2 id="lgpd-title">🍃 Sua privacidade importa</h2>
+      <p>Utilizamos cookies para melhorar sua experiência conforme a <strong>LGPD (Lei nº 13.709/2018)</strong>.</p>
+      <div class="lgpd-actions">
+        <button class="btn-secondary" onclick="openPrivacyModal()">Gerenciar preferências</button>
+        <button class="btn-primary" onclick="acceptLGPD()">Aceitar todos</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="privacy-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-overlay" onclick="closePrivacyModal()"></div>
+    <div class="modal-box">
+      <h2 id="modal-title">Gerenciar Preferências de Privacidade</h2>
+      <div class="privacy-options">
+        <label class="toggle-item"><span>Cookies essenciais (obrigatório)</span><input type="checkbox" checked disabled /></label>
+        <label class="toggle-item"><span>Personalização de ofertas</span><input type="checkbox" id="pref-personalization" checked /></label>
+        <label class="toggle-item"><span>Programa de fidelidade</span><input type="checkbox" id="pref-fidelity" checked /></label>
+        <label class="toggle-item"><span>Análise de uso</span><input type="checkbox" id="pref-analytics" /></label>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="closePrivacyModal()">Cancelar</button>
+        <button class="btn-primary" onclick="savePrivacyPrefs()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="header" role="banner">
+    <div class="container header-inner">
+      <a href="../../index.html" class="logo" aria-label="Raízes do Nordeste - Página inicial">
+        <span class="logo-icon">🌵</span>
+        <span class="logo-text">Raízes do Nordeste</span>
+      </a>
+      <nav class="nav" role="navigation" aria-label="Menu principal">
+        <a href="../../index.html" class="nav-link">Início</a>
+        <a href="cardapio.html" class="nav-link active">Cardápio</a>
+        <a href="pedido.html" class="nav-link">Meu Pedido</a>
+        <a href="fidelidade.html" class="nav-link">Fidelidade</a>
+      </nav>
+      <div class="header-actions">
+        <a href="login.html" class="btn-outline" id="btn-login">Entrar</a>
+        <a href="carrinho.html" class="btn-cart" aria-label="Ver carrinho">
+          🛒 <span id="cart-count" class="cart-badge">0</span>
+        </a>
+      </div>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    </div>
+    <nav class="mobile-nav hidden" id="mobile-nav">
+      <a href="../../index.html" class="mobile-nav-link">Início</a>
+      <a href="cardapio.html" class="mobile-nav-link">Cardápio</a>
+      <a href="pedido.html" class="mobile-nav-link">Meu Pedido</a>
+      <a href="fidelidade.html" class="mobile-nav-link">Fidelidade</a>
+      <a href="login.html" class="mobile-nav-link">Entrar / Cadastrar</a>
+    </nav>
+  </header>
+
+  <div class="page-header">
+    <div class="container">
+      <p class="breadcrumb"><a href="../../index.html">Início</a> › Cardápio</p>
+      <h1>Cardápio</h1>
+      <p id="unit-subtitle">Selecione uma unidade para ver os produtos disponíveis</p>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <div class="container cardapio-layout">
+
+      <!-- Sidebar -->
+      <aside class="cardapio-sidebar" aria-label="Filtros do cardápio">
+        <div class="unit-selector">
+          <label for="unit-select">📍 Unidade</label>
+          <select class="form-select" id="unit-select" onchange="changeUnit(this.value)" aria-label="Selecionar unidade">
+            <option value="">Selecione uma unidade</option>
+          </select>
+        </div>
+        <h3>Categorias</h3>
+        <div class="category-list" id="category-list" role="list">
+          <!-- Preenchido via JS -->
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <div class="cardapio-main">
+        <!-- Promoções -->
+        <div id="promo-banner" style="margin-bottom:1.5rem"></div>
+
+        <!-- Search -->
+        <div class="cardapio-search" role="search">
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <input type="search" id="search-input" placeholder="Buscar produto..." aria-label="Buscar produto no cardápio" oninput="filterProducts(this.value)" />
+        </div>
+
+        <!-- Products -->
+        <div id="products-container" aria-live="polite" aria-label="Lista de produtos">
+          <div class="text-center" style="padding:3rem;color:var(--color-text-light)">
+            <p style="font-size:2rem">📍</p>
+            <p>Selecione uma unidade para ver o cardápio</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-bottom"><p>© 2026 Raízes do Nordeste. Todos os direitos reservados.</p></div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/lgpd.js"></script>
+  <script src="../js/cardapio.js"></script>
+</body>
+</html>

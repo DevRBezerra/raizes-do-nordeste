@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Perfil — Raízes do Nordeste</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/pages.css" />
+</head>
+<body>
+
+  <div id="privacy-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-overlay" onclick="closePrivacyModal()"></div>
+    <div class="modal-box">
+      <h2 id="modal-title">Gerenciar Preferências de Privacidade</h2>
+      <div class="privacy-options">
+        <label class="toggle-item"><span>Cookies essenciais (obrigatório)</span><input type="checkbox" checked disabled /></label>
+        <label class="toggle-item"><span>Personalização de ofertas</span><input type="checkbox" id="pref-personalization" checked /></label>
+        <label class="toggle-item"><span>Programa de fidelidade</span><input type="checkbox" id="pref-fidelity" checked /></label>
+        <label class="toggle-item"><span>Análise de uso</span><input type="checkbox" id="pref-analytics" /></label>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="closePrivacyModal()">Cancelar</button>
+        <button class="btn-primary" onclick="savePrivacyPrefs()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="header" role="banner">
+    <div class="container header-inner">
+      <a href="../../index.html" class="logo"><span class="logo-icon">🌵</span><span class="logo-text">Raízes do Nordeste</span></a>
+      <nav class="nav" role="navigation" aria-label="Menu principal">
+        <a href="../../index.html" class="nav-link">Início</a>
+        <a href="cardapio.html" class="nav-link">Cardápio</a>
+        <a href="pedido.html" class="nav-link">Meu Pedido</a>
+        <a href="fidelidade.html" class="nav-link">Fidelidade</a>
+      </nav>
+      <div class="header-actions">
+        <a href="login.html" class="btn-outline" id="btn-login">Entrar</a>
+        <a href="carrinho.html" class="btn-cart" aria-label="Ver carrinho">🛒 <span id="cart-count" class="cart-badge">0</span></a>
+      </div>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    </div>
+    <nav class="mobile-nav hidden" id="mobile-nav">
+      <a href="../../index.html" class="mobile-nav-link">Início</a>
+      <a href="cardapio.html" class="mobile-nav-link">Cardápio</a>
+      <a href="pedido.html" class="mobile-nav-link">Meu Pedido</a>
+      <a href="fidelidade.html" class="mobile-nav-link">Fidelidade</a>
+      <a href="login.html" class="mobile-nav-link">Entrar / Cadastrar</a>
+    </nav>
+  </header>
+
+  <div class="page-header">
+    <div class="container">
+      <p class="breadcrumb"><a href="../../index.html">Início</a> › Meu Perfil</p>
+      <h1>👤 Meu Perfil</h1>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <div class="container profile-layout">
+      <div class="profile-grid">
+
+        <!-- Sidebar -->
+        <aside class="profile-sidebar" aria-label="Menu do perfil">
+          <div class="profile-avatar" aria-hidden="true">👤</div>
+          <h2 id="profile-name">Carregando...</h2>
+          <p id="profile-email" style="font-size:.85rem;color:var(--color-text-light)"></p>
+          <nav class="profile-nav" aria-label="Seções do perfil">
+            <a href="#section-data" class="profile-nav-link active" onclick="showSection('data')">📋 Meus dados</a>
+            <a href="#section-orders" class="profile-nav-link" onclick="showSection('orders')">📦 Meus pedidos</a>
+            <a href="#section-privacy" class="profile-nav-link" onclick="showSection('privacy')">🔒 Privacidade</a>
+            <a href="#" class="profile-nav-link" onclick="logout()" style="color:var(--color-error)">🚪 Sair</a>
+          </nav>
+        </aside>
+
+        <!-- Content -->
+        <div>
+
+          <!-- Dados -->
+          <section id="section-data" aria-labelledby="data-title">
+            <div style="background:var(--color-surface);border-radius:12px;padding:1.5rem;box-shadow:var(--shadow-sm)">
+              <h2 id="data-title" style="margin-bottom:1.25rem">Meus Dados</h2>
+              <form onsubmit="saveProfile(event)" novalidate>
+                <div class="form-group">
+                  <label class="form-label" for="p-name">Nome completo</label>
+                  <input class="form-input" type="text" id="p-name" autocomplete="name" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="p-email">E-mail</label>
+                  <input class="form-input" type="email" id="p-email" autocomplete="email" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="p-phone">Telefone</label>
+                  <input class="form-input" type="tel" id="p-phone" autocomplete="tel" placeholder="(00) 00000-0000" />
+                </div>
+                <button type="submit" class="btn-primary">Salvar alterações</button>
+              </form>
+            </div>
+          </section>
+
+          <!-- Pedidos -->
+          <section id="section-orders" class="hidden" aria-labelledby="orders-title">
+            <div style="background:var(--color-surface);border-radius:12px;padding:1.5rem;box-shadow:var(--shadow-sm)">
+              <h2 id="orders-title" style="margin-bottom:1.25rem">Meus Pedidos</h2>
+              <div id="orders-list"></div>
+            </div>
+          </section>
+
+          <!-- Privacidade -->
+          <section id="section-privacy" class="hidden" aria-labelledby="privacy-title">
+            <div style="background:var(--color-surface);border-radius:12px;padding:1.5rem;box-shadow:var(--shadow-sm)">
+              <h2 id="privacy-title" style="margin-bottom:1rem">Privacidade e Dados (LGPD)</h2>
+              <p style="font-size:.9rem;color:var(--color-text-light);margin-bottom:1.5rem">
+                Conforme a <strong>Lei Geral de Proteção de Dados (LGPD – Lei nº 13.709/2018)</strong>,
+                você tem os seguintes direitos sobre seus dados pessoais:
+              </p>
+              <div style="display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.5rem">
+                <div style="background:var(--color-bg);border-radius:8px;padding:1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem">
+                  <div><strong>📋 Acessar meus dados</strong><p style="font-size:.85rem;color:var(--color-text-light)">Baixe uma cópia de todos os seus dados.</p></div>
+                  <button class="btn-outline btn-sm" onclick="showToast('📧 Solicitação enviada! Você receberá um e-mail em até 15 dias.','info')">Solicitar</button>
+                </div>
+                <div style="background:var(--color-bg);border-radius:8px;padding:1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem">
+                  <div><strong>✏️ Corrigir meus dados</strong><p style="font-size:.85rem;color:var(--color-text-light)">Atualize informações incorretas.</p></div>
+                  <button class="btn-outline btn-sm" onclick="showSection('data')">Editar</button>
+                </div>
+                <div style="background:var(--color-bg);border-radius:8px;padding:1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem">
+                  <div><strong>🍪 Gerenciar cookies</strong><p style="font-size:.85rem;color:var(--color-text-light)">Controle quais dados você autoriza.</p></div>
+                  <button class="btn-outline btn-sm" onclick="openPrivacyModal()">Gerenciar</button>
+                </div>
+                <div style="background:#fde8e6;border-radius:8px;padding:1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem">
+                  <div><strong style="color:var(--color-error)">🗑️ Excluir minha conta</strong><p style="font-size:.85rem;color:var(--color-text-light)">Exclui permanentemente todos os seus dados.</p></div>
+                  <button class="btn-danger btn-sm" onclick="requestDelete()">Solicitar exclusão</button>
+                </div>
+              </div>
+              <div class="alert alert-info" style="font-size:.85rem">
+                Para dúvidas sobre privacidade, entre em contato com nosso DPO (Encarregado de Dados):
+                <strong>privacidade@raizesdonordeste.com.br</strong>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-bottom"><p>© 2026 Raízes do Nordeste. Todos os direitos reservados.</p></div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/lgpd.js"></script>
+  <script src="../js/perfil.js"></script>
+</body>
+</html>

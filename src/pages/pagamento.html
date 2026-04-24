@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagamento — Raízes do Nordeste</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/pages.css" />
+</head>
+<body>
+
+  <header class="header" role="banner">
+    <div class="container header-inner">
+      <a href="../../index.html" class="logo"><span class="logo-icon">🌵</span><span class="logo-text">Raízes do Nordeste</span></a>
+      <div class="header-actions">
+        <a href="carrinho.html" class="btn-outline">← Voltar ao carrinho</a>
+      </div>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    </div>
+    <nav class="mobile-nav hidden" id="mobile-nav">
+      <a href="../../index.html" class="mobile-nav-link">Início</a>
+      <a href="cardapio.html" class="mobile-nav-link">Cardápio</a>
+      <a href="carrinho.html" class="mobile-nav-link">← Voltar ao carrinho</a>
+    </nav>
+  </header>
+
+  <div class="page-header">
+    <div class="container">
+      <p class="breadcrumb"><a href="../../index.html">Início</a> › <a href="carrinho.html">Carrinho</a> › Pagamento</p>
+      <h1>💳 Pagamento</h1>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <div class="container payment-layout">
+
+      <!-- Step 1: Resumo + Confirmação -->
+      <div id="step-confirm" class="payment-card">
+        <h2>Confirmar Pedido</h2>
+
+        <div id="order-summary-items" style="margin-bottom:1.5rem"></div>
+
+        <div style="background:var(--color-bg);border-radius:8px;padding:1rem;margin-bottom:1.5rem">
+          <div style="display:flex;justify-content:space-between;margin-bottom:.5rem;font-size:.95rem">
+            <span>Subtotal</span><span id="pay-subtotal">R$ 0,00</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-weight:700;font-size:1.1rem;border-top:1px solid var(--color-border);padding-top:.75rem;margin-top:.5rem">
+            <span>Total</span><span id="pay-total">R$ 0,00</span>
+          </div>
+        </div>
+
+        <div class="alert alert-info" style="font-size:.85rem;margin-bottom:1.5rem">
+          🔒 <strong>Pagamento seguro.</strong> Seus dados financeiros são processados por serviço externo certificado (PCI-DSS). A Raízes do Nordeste não armazena dados de cartão.
+        </div>
+
+        <div id="payment-method-display" style="background:var(--color-bg);border-radius:8px;padding:1rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem">
+          <span style="font-size:1.5rem" id="pay-method-icon">💳</span>
+          <div>
+            <div style="font-weight:600" id="pay-method-name">Cartão de Crédito</div>
+            <div style="font-size:.85rem;color:var(--color-text-light)">Forma de pagamento selecionada</div>
+          </div>
+          <a href="carrinho.html" style="margin-left:auto;font-size:.85rem;color:var(--color-primary)">Alterar</a>
+        </div>
+
+        <button class="btn-primary" style="width:100%" onclick="processPayment()">
+          Confirmar e Pagar
+        </button>
+      </div>
+
+      <!-- Step 2: Processando -->
+      <div id="step-processing" class="payment-card payment-processing hidden">
+        <h2>Processando pagamento...</h2>
+        <p style="color:var(--color-text-light)">Aguarde enquanto confirmamos seu pagamento com o serviço externo.</p>
+        <div class="spinner" aria-label="Carregando"></div>
+        <p style="font-size:.85rem;color:var(--color-text-light);text-align:center">
+          🔒 Conexão segura com gateway de pagamento
+        </p>
+      </div>
+
+      <!-- Step 3: Sucesso -->
+      <div id="step-success" class="payment-card payment-success hidden">
+        <div class="success-icon">🎉</div>
+        <h2>Pagamento confirmado!</h2>
+        <p style="color:var(--color-text-light);margin:.75rem 0 1.5rem">
+          Seu pedido foi recebido e está sendo preparado.
+        </p>
+        <div style="background:var(--color-bg);border-radius:8px;padding:1rem;margin-bottom:1.5rem;text-align:left">
+          <div style="display:flex;justify-content:space-between;margin-bottom:.5rem;font-size:.9rem">
+            <span>Número do pedido</span><strong id="order-number">#1043</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:.5rem;font-size:.9rem">
+            <span>Total pago</span><strong id="paid-total">R$ 0,00</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:.9rem">
+            <span>Pontos ganhos</span><strong id="points-earned" style="color:var(--color-primary)">+0 pontos</strong>
+          </div>
+        </div>
+        <a href="pedido.html" class="btn-primary" style="display:block;text-align:center;margin-bottom:.75rem">
+          Acompanhar pedido
+        </a>
+        <a href="../../index.html" class="btn-outline" style="display:block;text-align:center">
+          Voltar ao início
+        </a>
+      </div>
+
+      <!-- Step 4: Erro -->
+      <div id="step-error" class="payment-card hidden" style="text-align:center;padding:2rem">
+        <div style="font-size:3rem;margin-bottom:1rem">❌</div>
+        <h2 style="color:var(--color-error)">Pagamento recusado</h2>
+        <p style="color:var(--color-text-light);margin:.75rem 0 1.5rem" id="error-message">
+          Não foi possível processar o pagamento. Verifique seus dados e tente novamente.
+        </p>
+        <button class="btn-primary" onclick="retryPayment()" style="margin-bottom:.75rem;width:100%">
+          Tentar novamente
+        </button>
+        <a href="carrinho.html" class="btn-outline" style="display:block;text-align:center">
+          Alterar forma de pagamento
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-bottom"><p>© 2026 Raízes do Nordeste. Todos os direitos reservados.</p></div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/lgpd.js"></script>
+  <script src="../js/pagamento.js"></script>
+</body>
+</html>
