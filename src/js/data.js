@@ -40,7 +40,7 @@ const Auth = (() => {
 
   // Proteção de rotas
   const protectPage = () => {
-    const protectedPages = ['perfil.html', 'fidelidade.html', 'pagamento.html'];
+    const protectedPages = ['perfil.html', 'fidelidade.html', 'pagamento.html', 'pedido.html'];
     const currentPage = window.location.pathname.split('/').pop();
     
     if (protectedPages.includes(currentPage) && !isLoggedIn()) {
@@ -162,8 +162,8 @@ let RN_DATA = {
   ],
 
   mockUser: {
-    name: "Renan Bezerra",
-    email: "renan@email.com",
+    name: "Maria Oliveira",
+    email: "maria@email.com",
     phone: "(81) 98888-7777",
     points: 313,
     tier: "Raiz",

@@ -26,8 +26,8 @@ function fazerLogin(e) {
   }
   if (!valid) return;
 
-  // Login com o usuário padrão (Renan)
-  if (email === 'renan@email.com' && password === '123456') {
+  // Login com o usuário padrão (Maria)
+  if (email === 'maria@email.com' && password === '123456') {
     sucessoLogin(RN_DATA.mockUser);
   } else if (password.length >= 6) {
     // Permite login com qualquer outro e-mail para testes

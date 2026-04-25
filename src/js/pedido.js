@@ -2,6 +2,7 @@ let statusInterval = null;
 let currentStatusIdx = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (!Auth.isLoggedIn()) return; // Auth.protectPage já redireciona
   renderStatus();
 });
 
